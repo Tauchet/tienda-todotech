@@ -14,6 +14,7 @@ import java.util.List;
 public class Lugar implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String nombre;

@@ -1,0 +1,3 @@
+INSERT lugar(id, nombre, descripcion, latitud, longitud, estado, fecha_creacion) VALUES (1, "Cabra Loco", "Un café rico", 10.5, 2.45405, "ESPERANDO", "2002/05/19");
+INSERT lugar(id, nombre, descripcion, latitud, longitud, estado, fecha_creacion) VALUES (2, "Supermercado", "Super descuentos...", 4.450450, -3.4405, "ESPERANDO", "2004/04/19");
+INSERT lugar(id, nombre, descripcion, latitud, longitud, estado, fecha_creacion) VALUES (3, "Hamburguis", "Una rica hamburguesa artesanal.", 1.7870, -2.4540, "ESPERANDO", "2010/03/19");

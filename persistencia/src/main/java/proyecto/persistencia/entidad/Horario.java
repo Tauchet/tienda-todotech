@@ -13,13 +13,10 @@ import java.util.List;
 public class Horario implements Serializable {
 
     @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private int id;
 
-    @ElementCollection
-    public List<Integer> horasDeInicio;
-
-    @ElementCollection
-    public List<Integer> horasDeCerrado;
+    private String horario;
 
     @OneToOne
     private Lugar lugar;

@@ -3,9 +3,7 @@ package proyecto.persistencia.entidad;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -14,9 +12,10 @@ import java.io.Serializable;
 public class Telefono implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private int numero;
+    private long numero;
 
     @ManyToOne
     private Lugar lugar;

@@ -1,0 +1,3 @@
+INSERT INTO imagen(id, url) VALUES (0, "https://ep01.epimg.net/elcomidista/imagenes/2017/09/27/articulo/1506522721_155894_1506523041_media_normal.jpg");
+INSERT INTO imagen(id, url) VALUES (1, "https://as.com/deporteyvida/imagenes/2018/06/19/portada/1529402043_039778_1529402207_noticia_normal.jpg");
+INSERT INTO imagen(id, url) VALUES (2, "https://estaticos.muyinteresante.es/uploads/images/gallery/5548e20741444aef0ed38e65/cafe15.jpg");
