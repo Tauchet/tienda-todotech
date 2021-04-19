@@ -35,13 +35,13 @@ public class TelefonoTest {
     @Test
     public void registrarImagen() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
         Lugar lugar = lugarRepositorio.save(crearLugarPrueba(categoria, ciudad, lugarPropietario));
 
-        // Creación del comentario
+        // Creación del telefono
         Telefono telefono = crearTelefonoPrueba(lugar);
 
         // Guardamos los datos creados
@@ -55,7 +55,7 @@ public class TelefonoTest {
     @Test
     public void editarImagen() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -63,7 +63,7 @@ public class TelefonoTest {
 
         Telefono resultadoCreacion = telefonoRepositorio.save(crearTelefonoPrueba(lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda del telefono a modificar
         Telefono telefono = telefonoRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         telefono.setNumero(3148001564L);
 
@@ -78,7 +78,7 @@ public class TelefonoTest {
     @Test
     public void eliminarImagen() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -86,14 +86,14 @@ public class TelefonoTest {
 
         Telefono resultadoCreacion = telefonoRepositorio.save(crearTelefonoPrueba(lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda del telefono a modificar
         Telefono telefono = telefonoRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNotNull(telefono);
 
-        // Eliminemos la ciudad
+        // Eliminemos el telefono
         telefonoRepositorio.delete(telefono);
 
-        // Buscamos de nuevo la ciudad
+        // Buscamos de nuevo el telefono
         Telefono busqueda = telefonoRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNull(busqueda);
 

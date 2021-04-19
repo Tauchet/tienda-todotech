@@ -38,7 +38,7 @@ public class FavoritoTest {
     @Test
     public void registrarFavorito() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba1(ciudad));
         Usuario usuario = usuarioRepositorio.save(crearUsuarioPrueba2(ciudad));
@@ -59,7 +59,7 @@ public class FavoritoTest {
     @Test
     public void eliminarComentario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba1(ciudad));
         Usuario usuario = usuarioRepositorio.save(crearUsuarioPrueba2(ciudad));
@@ -69,14 +69,14 @@ public class FavoritoTest {
         // Creación del favortio
         Favorito resultadoCreacion = favoritoRepositorio.save(crearFavorito(usuario, lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda del favorito a modificar
         Favorito favorito = favoritoRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNotNull(favorito);
 
-        // Eliminemos la ciudad
+        // Eliminemos el favorito
         favoritoRepositorio.delete(favorito);
 
-        // Buscamos de nuevo la ciudad
+        // Buscamos de nuevo la favorito
         Favorito busquedaComentario = favoritoRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNull(busquedaComentario);
 
@@ -87,16 +87,6 @@ public class FavoritoTest {
         favorito.setUsuario(usuario);
         favorito.setLugar(lugar);
         return favorito;
-    }
-
-    private Comentario crearComentario(Usuario usuario, Lugar lugar) {
-        Comentario comentario = new Comentario();
-        comentario.setTexto("Es un buen producto!");
-        comentario.setCalificacion(5);
-        comentario.setFechaComentario(new Date());
-        comentario.setUsuario(usuario);
-        comentario.setLugar(lugar);
-        return comentario;
     }
 
     private Lugar crearLugarPrueba(Categoria categoria, Ciudad ciudad, Usuario usuario) {

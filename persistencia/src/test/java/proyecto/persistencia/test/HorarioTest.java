@@ -36,13 +36,13 @@ public class HorarioTest {
     @Test
     public void registrarHorario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
         Lugar lugar = lugarRepositorio.save(crearLugarPrueba(categoria, ciudad, lugarPropietario));
 
-        // Creación del comentario
+        // Creación del horario
         Horario horario = crearHorario(lugar);
 
         // Guardamos los datos creados
@@ -56,7 +56,7 @@ public class HorarioTest {
     @Test
     public void editarHorario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -64,7 +64,7 @@ public class HorarioTest {
 
         Horario resultadoCreacion = horarioRepositorio.save(crearHorario(lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda del horario a modificar
         Horario horario = horarioRepositorio.findById(resultadoCreacion.getId()).orElse(null);
 
         // Cambiar de que el lunes abre más temprano
@@ -81,7 +81,7 @@ public class HorarioTest {
     @Test
     public void eliminarHorario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -89,14 +89,14 @@ public class HorarioTest {
 
         Horario resultadoCreacion = horarioRepositorio.save(crearHorario(lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda del horario a modificar
         Horario horario = horarioRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNotNull(horario);
 
-        // Eliminemos la ciudad
+        // Eliminemos el horario
         horarioRepositorio.delete(horario);
 
-        // Buscamos de nuevo la ciudad
+        // Buscamos de nuevo el horario
         Horario busqueda = horarioRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNull(busqueda);
 

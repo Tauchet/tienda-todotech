@@ -28,7 +28,7 @@ public class UsuarioTest {
     @Test
     public void registrarUsuario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudadPrueba = crearCiudadPrueba();
         Ciudad ciudadOrigen = ciudadRepositorio.save(ciudadPrueba);
 
@@ -49,7 +49,7 @@ public class UsuarioTest {
     @Test
     public void editarUsuario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudadPrueba = crearCiudadPrueba();
         ciudadPrueba = ciudadRepositorio.save(ciudadPrueba);
 
@@ -78,7 +78,7 @@ public class UsuarioTest {
     @Test
     public void eliminarUsuario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudadPrueba = crearCiudadPrueba();
         ciudadPrueba = ciudadRepositorio.save(ciudadPrueba);
 

@@ -36,13 +36,13 @@ public class ImagenTest {
     @Test
     public void registrarImagen() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
         Lugar lugar = lugarRepositorio.save(crearLugarPrueba(categoria, ciudad, lugarPropietario));
 
-        // Creación del comentario
+        // Creación de la imagen
         Imagen imagen = crearImagen(lugar);
 
         // Guardamos los datos creados
@@ -56,7 +56,7 @@ public class ImagenTest {
     @Test
     public void editarImagen() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -64,7 +64,7 @@ public class ImagenTest {
 
         Imagen resultadoCreacion = imagenRepositorio.save(crearImagen(lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda de la imagen a modificar
         Imagen imagen = imagenRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         imagen.setUrl("https://www.lavanguardia.com/files/og_thumbnail/uploads/2020/12/14/5fd7240cadcfe.jpeg");
 
@@ -79,7 +79,7 @@ public class ImagenTest {
     @Test
     public void eliminarImagen() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -87,14 +87,14 @@ public class ImagenTest {
 
         Imagen resultadoCreacion = imagenRepositorio.save(crearImagen(lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda de la imagen a modificar
         Imagen imagen = imagenRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNotNull(imagen);
 
-        // Eliminemos la ciudad
+        // Eliminemos la imagen
         imagenRepositorio.delete(imagen);
 
-        // Buscamos de nuevo la ciudad
+        // Buscamos de nuevo la imagen
         Imagen busqueda = imagenRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNull(busqueda);
 

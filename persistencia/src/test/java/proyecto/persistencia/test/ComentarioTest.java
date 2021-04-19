@@ -35,7 +35,7 @@ public class ComentarioTest {
     @Test
     public void registrarComentario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba1(ciudad));
         Usuario usuario = usuarioRepositorio.save(crearUsuarioPrueba2(ciudad));
@@ -56,7 +56,7 @@ public class ComentarioTest {
     @Test
     public void editarComentario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba1(ciudad));
         Usuario usuario = usuarioRepositorio.save(crearUsuarioPrueba2(ciudad));
@@ -65,7 +65,7 @@ public class ComentarioTest {
 
         Comentario resultadoCreacion = comentarioRepositorio.save(crearComentario(usuario, lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda de la comenatario a modificar
         Comentario comentario = comentarioRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         comentario.setRespuesta("Gracias, si, es muy buen producto!");
 
@@ -80,7 +80,7 @@ public class ComentarioTest {
     @Test
     public void eliminarComentario() {
 
-        // Creación de ciudades
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario lugarPropietario = usuarioRepositorio.save(crearUsuarioPrueba1(ciudad));
         Usuario usuario = usuarioRepositorio.save(crearUsuarioPrueba2(ciudad));
@@ -89,14 +89,14 @@ public class ComentarioTest {
 
         Comentario resultadoCreacion = comentarioRepositorio.save(crearComentario(usuario, lugar));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda del comentario a modificar
         Comentario comentario = comentarioRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNotNull(comentario);
 
-        // Eliminemos la ciudad
+        // Eliminemos el comentario
         comentarioRepositorio.delete(comentario);
 
-        // Buscamos de nuevo la ciudad
+        // Buscamos de nuevo el comentario
         Comentario busquedaComentario = comentarioRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNull(busquedaComentario);
 

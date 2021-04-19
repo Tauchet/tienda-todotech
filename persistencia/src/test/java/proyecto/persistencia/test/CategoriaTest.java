@@ -39,10 +39,10 @@ public class CategoriaTest {
     @Test
     public void editarCategoria() {
 
-        // Creación de ciudades de prueba
+        // Creación de la categoria de prueba
         Categoria resultadoCreacion = categoriaRepositorio.save(crearCategoriaPrueba());
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda de la categoria a modificar
         Categoria busqueda = categoriaRepositorio.findById(resultadoCreacion.getId()).orElse(null);
 
         // Cambiamos valores
@@ -59,7 +59,7 @@ public class CategoriaTest {
     @Test
     public void eliminarCategoria() {
 
-        // Creación de ciudades de prueba
+        // Creación de la categoria de prueba
         Categoria resultadoCreacion = categoriaRepositorio.save(crearCategoriaPrueba());
 
         // Busqueda de la categoria a modificar

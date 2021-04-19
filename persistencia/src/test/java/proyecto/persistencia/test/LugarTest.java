@@ -34,7 +34,7 @@ public class LugarTest {
     @Test
     public void registrarLugar() {
 
-        // Creación de datos
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario usuario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -53,7 +53,7 @@ public class LugarTest {
     @Test
     public void editarLugar() {
 
-        // Creación de datos
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario usuario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -61,7 +61,7 @@ public class LugarTest {
         // Creación del lugar
         Lugar resultadoCreacion = lugarRepositorio.save(crearLugarPrueba(categoria, ciudad, usuario));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda del lugar a modificar
         Lugar busqueda = lugarRepositorio.findById(resultadoCreacion.getId()).orElse(null);
 
         // Cambiamos valores
@@ -78,7 +78,7 @@ public class LugarTest {
     @Test
     public void eliminarLugar() {
 
-        // Creación de datos
+        // Creación de los datos previos
         Ciudad ciudad = ciudadRepositorio.save(crearCiudadPrueba());
         Usuario usuario = usuarioRepositorio.save(crearUsuarioPrueba(ciudad));
         Categoria categoria = categoriaRepositorio.save(crearCategoriaPrueba());
@@ -86,14 +86,14 @@ public class LugarTest {
         // Creación del lugar
         Lugar resultadoCreacion = lugarRepositorio.save(crearLugarPrueba(categoria, ciudad, usuario));
 
-        // Busqueda de la ciudad a modificar
+        // Busqueda del lugar a modificar
         Lugar lugar = lugarRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNotNull(lugar);
 
-        // Eliminemos la ciudad
+        // Eliminemos el lugar
         lugarRepositorio.delete(lugar);
 
-        // Buscamos de nuevo la ciudad
+        // Buscamos de nuevo el lugar
         Lugar busquedaLugar = lugarRepositorio.findById(resultadoCreacion.getId()).orElse(null);
         Assertions.assertNull(busquedaLugar);
 
