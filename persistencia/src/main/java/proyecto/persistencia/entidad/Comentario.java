@@ -1,4 +1,4 @@
-package me.persistencia.entidad;
+package proyecto.persistencia.entidad;
 
 import lombok.Getter;
 import lombok.Setter;

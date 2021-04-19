@@ -1,13 +1,11 @@
-package me.persistencia.entidad;
+package proyecto.persistencia.entidad;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZoneId;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Getter

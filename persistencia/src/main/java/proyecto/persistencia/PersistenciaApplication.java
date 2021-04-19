@@ -1,4 +1,4 @@
-package me.persistencia;
+package proyecto.persistencia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

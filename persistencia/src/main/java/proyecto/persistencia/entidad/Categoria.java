@@ -1,4 +1,4 @@
-package me.persistencia.entidad;
+package proyecto.persistencia.entidad;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,17 +12,14 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Ciudad implements Serializable {
+public class Categoria implements Serializable {
 
     @Id
     private int id;
 
     private String nombre;
 
-    @OneToMany(mappedBy="ciudad")
-    private List<Usuario> usuarios;
-
-    @OneToMany(mappedBy="ciudad")
+    @OneToMany(mappedBy="categoria")
     private List<Lugar> lugares;
 
 }

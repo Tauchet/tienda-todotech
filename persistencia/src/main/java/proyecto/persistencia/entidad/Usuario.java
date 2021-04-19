@@ -1,4 +1,4 @@
-package me.persistencia.entidad;
+package proyecto.persistencia.entidad;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,13 +14,18 @@ import java.util.List;
 public class Usuario implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name="email", unique = true)
     private String email;
+
+    @Column(name="username", unique = true)
+    private String username;
+
     private String password;
-    private String nickname;
     private String nombre;
-    private String avatar_url;
+    private String avatarUrl;
 
     @Enumerated(value = EnumType.STRING)
     private Rol rol;
