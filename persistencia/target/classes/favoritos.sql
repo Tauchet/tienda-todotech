@@ -75,10 +75,6 @@ VALUES (2,
         (select id from ciudad where id=2),
         (select id from usuario where id=1));
 
-# Creación de Horarios
-INSERT INTO horario(id, horario, lugar_id)
-VALUES (0, "8 - 20; 10 - 20; 8 - 20; 10 - 20; 8 - 20; 10 - 20; NaN", (select id from lugar where id=0));
-INSERT INTO horario(id, horario, lugar_id)
-VALUES (1, "2 - 20; 10 - 20; 10 - 20; 10 - 20; 10 - 20; 10 - 20; 10 - 12", (select id from lugar where id=1));
-INSERT INTO horario(id, horario, lugar_id)
-VALUES (2, "4 - 20; 4 - 20; 4 - 20; 4 - 20; 4 - 20; 4 - 20; 2 - 8", (select id from lugar where id=0));
+INSERT favorito(id, lugar_id, usuario_id) VALUES (0, (select id from lugar where id=0), (select id from usuario where id=1));
+INSERT favorito(id, lugar_id, usuario_id) VALUES (1, (select id from lugar where id=1), (select id from usuario where id=1));
+INSERT favorito(id, lugar_id, usuario_id) VALUES (2, (select id from lugar where id=1), (select id from usuario where id=2));
