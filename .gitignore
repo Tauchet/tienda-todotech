@@ -1,1 +1,3 @@
-*.class
+docker-compose.yml
+Dockerfile
+./docker
