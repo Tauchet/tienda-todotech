@@ -1,0 +1,38 @@
+html, body, #content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    background: #34495E;
+}
+
+#content > .container {
+    width: 80%;
+    max-width: 600px;
+}
+
+.form {
+    margin: 2rem 0;
+}
+
+.logo {
+    text-align: center;
+}
+
+.form .aviso button {
+    margin-bottom: 1rem;
+}
+
+.form .aviso {
+    text-align: center;
+    color: #E9F0FB;
+}
+
+.form .aviso a {
+    color: inherit;
+    font-weight: bold;
+}

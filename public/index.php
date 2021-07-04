@@ -3,26 +3,16 @@
 require_once './autoload.php';
 require_once '../vendor/autoload.php';
 
+use Extra\UsuarioExtension;
 use Twig\Environment;
+use Twig\Extra\Html\HtmlExtension;
 use Twig\Loader\FilesystemLoader;
 
-$loader = new FilesystemLoader('../src/templates');
+$loader = new FilesystemLoader('../src/vistas');
 $twig = new Environment($loader);
+$twig->addExtension(new HtmlExtension());
+$twig->addExtension(new UsuarioExtension());
 
-function endsWith( $haystack, $needle ) {
-    $length = strlen( $needle );
-    if( !$length ) {
-        return true;
-    }
-    return substr( $haystack, -$length ) === $needle;
-}
-
-function render($template, $params) {
-    if (!endsWith($template, '.twig')) {
-        $template .= '.twig';
-    }
-    echo $GLOBALS["twig"]->render($template, $params);
-}
-
+require_once "../src/lib.php";
 require_once "../src/database.php";
 require_once "../src/routes.php";

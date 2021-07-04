@@ -1,0 +1,38 @@
+{% extends "base.twig" %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+{% block metadata %}
+    <link rel="stylesheet" href="/public/assets/login/estilos.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="logo">
+            {% include "componentes/logo.twig" %}
+        </div>
+        {% if (error) %}
+            <div class="alerta">
+                <div class="alerta-header">
+                    <h3>¡ERROR!</h3>
+                </div>
+                <div class="alerta-content">
+                    <p>{{ error }}</p>
+                </div>
+            </div>
+        {% endif %}
+        <form method="post" class="form">
+            <div class="{{html_classes('form-group-dark', {error: error_correo})}}">
+                <label for="correo">Correo Electronico</label>
+                <input type="email" name="correo" id="correo">
+            </div>
+            <div class="{{html_classes('form-group-dark', {error: error_contrasenia})}}">
+                <label for="contrasenia">Contraseña</label>
+                <input type="password" name="contrasenia" id="contrasenia">
+            </div>
+            <div class="aviso">
+                <button class="btn">Iniciar Sesión</button>
+                <p>¿Eres nuevo aquí? <a href="/registro">Registrarse</a></p>
+            </div>
+        </form>
+    </div>
+{% endblock %}

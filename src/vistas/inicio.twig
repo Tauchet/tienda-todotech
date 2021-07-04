@@ -1,0 +1,51 @@
+{% extends "base.twig" %}
+
+{% block title %}Inicio{% endblock %}
+{% block metadata %}
+    <link rel="stylesheet" href="/public/assets/inicio/estilos.css">
+{% endblock %}
+
+{% block content %}
+
+    {% include "componentes/menu.twig" %}
+
+    <div class="contenido">
+        <form method="get">
+            <div class="input-custom">
+                <label class="input-custom__label" for="busqueda">Búsqueda</label>
+                <div class="input-custom__contenido">
+                    <div class="input-custom__icono">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <input value="{{ busqueda }}" type="text" name="busqueda" id="busqueda" placeholder="Nombre del producto">
+                    <div class="input-custom__boton">
+                        <button type="submit" class="btn info">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="productos">
+            {% for i, producto in productos %}
+                <div class="producto">
+                    <a href="/producto/{{ producto.id }}">
+                        <div class="producto__nombre">
+                            <p>{{ producto.nombre }}</p>
+                        </div>
+                        <div class="producto__descripcion">
+                            <p>{{ producto.descripcion }}</p>
+                        </div>
+                        <div class="producto__precio">
+                            <p>${{ producto.precio }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="/public/assets/inicio/busqueda.js"></script>
+{% endblock %}

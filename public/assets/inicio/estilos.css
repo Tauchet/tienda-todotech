@@ -1,0 +1,50 @@
+#content > .contenido {
+    padding: 2rem 0;
+}
+
+.productos {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    gap: 1rem;
+}
+
+.producto {
+    background: white;
+    border-bottom: 2px solid #ddd;
+    border-radius: 0.5rem;
+    color: #666;
+    transition: 0.3s;
+}
+
+.producto:hover {
+    transform: scale(1.05);
+}
+
+.producto a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    padding: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+.producto__nombre {
+    color: #444;
+    font-weight: bold;
+}
+
+.producto__descripcion {
+    margin: 1rem 0;
+    flex: 1;
+}
+
+.producto__descripcion p {
+    overflow-wrap: break-word;
+}
+
+.producto__precio {
+    color: #5B5B5B;
+}
