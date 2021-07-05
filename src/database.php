@@ -77,3 +77,14 @@ function buscarProductos($busqueda = null): array {
     return $resultado;
 
 }
+
+function registrarProducto($nombre, $descripcion, $precio) {
+    $precio = intval($precio);
+    $conexion = conectar();
+    $comando = "INSERT INTO productos(nombre, descripcion, precio) VALUES ('$nombre', '$descripcion', $precio);";
+    $resultado = mysqli_query($conexion, $comando);
+    if ($resultado) {
+        return mysqli_insert_id($conexion);
+    }
+    return null;
+}

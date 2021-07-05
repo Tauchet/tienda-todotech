@@ -1,0 +1,21 @@
+#content > .contenido {
+    padding: 2rem 0;
+}
+
+.resultado {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.resultado-icon {
+    color: #2ECC71;
+}
+
+.resultado-contenido {
+    font-size: 1.5rem;
+    margin: 3.5rem 0 4rem;
+}
+
+.alerta + form {
+    margin-top: 2rem;
+}

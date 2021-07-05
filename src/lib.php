@@ -8,7 +8,7 @@ function endsWith( $haystack, $needle ) {
     return substr( $haystack, -$length ) === $needle;
 }
 
-function renderizar($template, $params) {
+function renderizar($template, $params = []) {
     if (!endsWith($template, '.twig')) {
         $template .= '.twig';
     }

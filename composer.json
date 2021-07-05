@@ -1,8 +1,9 @@
 {
     "require": {
         "twig/twig": "3.0",
-        "bramus/router": "~1.5",
         "twig/html-extra": "^3.3",
-        "ext-mysqli": "*"
+        "altorouter/altorouter": "1.1.0",
+        "bramus/router": "~1.5",
+      "ext-mysqli": "*"
     }
 }

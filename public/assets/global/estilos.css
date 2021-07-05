@@ -172,13 +172,16 @@ header .cerrar-sesion a {
     margin-top: 0.3rem;
 }
 
-.input-custom__contenido input {
+.input-custom__contenido input,
+.input-custom__contenido textarea {
     flex: 1;
     border: none;
     background: transparent;
     outline: none;
     font-size: 1rem;
     transition: 0.4s;
+    resize: none;
+    width: 100%;
 }
 
 .input-custom.focus .input-custom__contenido {
@@ -188,4 +191,43 @@ header .cerrar-sesion a {
 .input-custom.focus .input-custom__icono,
 .input-custom.focus .input-custom__label {
     color: #2185d0;
+}
+
+#encabezado-admin {
+    background: #486684;
+    border-top: 2px solid rgba(255,255,255,0.1);
+}
+
+#encabezado-admin .contenido {
+    padding: 1rem 0;
+    color: white;
+}
+
+#encabezado-admin li {
+    list-style: none;
+    display: flex;
+}
+
+#encabezado-admin li a {
+    display: block;
+    background: whitesmoke;
+    padding: 0.6rem 0.8rem;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    border-bottom: 4px solid #ccc;
+    color: #666;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#encabezado-admin li a:hover {
+    transform: scale(0.9);
+}
+
+.form-group:not(:last-child) {
+    margin-bottom: 1.2rem;
+}
+
+.form-group-center {
+    text-align: center;
 }

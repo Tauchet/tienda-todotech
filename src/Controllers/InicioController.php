@@ -14,6 +14,7 @@ class InicioController {
         }
 
         $resultado['productos'] = buscarProductos($busqueda);
+
         renderizar("inicio", $resultado);
 
     }

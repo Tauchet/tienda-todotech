@@ -1,0 +1,79 @@
+{% extends "base.twig" %}
+
+{% block title %}Nuevo Producto{% endblock %}
+{% block metadata %}
+    <link rel="stylesheet" href="/public/assets/producto-editor/estilos.css">
+{% endblock %}
+
+{% block content %}
+
+    {% include "componentes/menu.twig" %}
+
+    <div class="contenido">
+        {% if completado %}
+            <div class="resultado">
+                <div class="resultado-icon">
+                    <p><i class="fas fa-check-circle fa-8x"></i></p>
+                </div>
+                <div class="resultado-contenido">
+                    <h2>¡Producto creado!</h2>
+                    <p>El producto fue generado con el código <strong>#{{ producto_codigo }}</strong></p>
+                </div>
+                <div class="resultado-opciones">
+                    <a href="/" class="btn info">Ver los productos</a>
+                    <a href="/admin/producto-nuevo" class="btn info">Agregar otro</a>
+                </div>
+            </div>
+        {% else %}
+            {% if (error) %}
+                <div class="alerta">
+                    <div class="alerta-header">
+                        <h3>¡ERROR!</h3>
+                    </div>
+                    <div class="alerta-content">
+                        <p>{{ error }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            <form method="post">
+                <div class="form-group">
+                    <div class="input-custom">
+                        <label class="input-custom__label" for="nombre">Nombre</label>
+                        <div class="input-custom__contenido">
+                            <div class="input-custom__icono">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <input minlength="10" value="{{ nombre }}" type="text" name="nombre" id="nombre" placeholder="Ingresa nombre del producto" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-custom">
+                        <label class="input-custom__label" for="descripcion">Descripción</label>
+                        <div class="input-custom__contenido">
+                            <div class="input-custom__icono">
+                                <i class="fas fa-scroll"></i>
+                            </div>
+                            <textarea minlength="10" rows="4" value="{{ descripcion }}" type="text" name="descripcion" id="descripcion" placeholder="Ingresa la descripción" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-custom">
+                        <label class="input-custom__label" for="precio">Precio</label>
+                        <div class="input-custom__contenido">
+                            <div class="input-custom__icono">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <input min="1" value="{{ precio }}" type="number" name="precio" id="precio" placeholder="Ingresa el precio" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-center">
+                    <button class="btn">Agregar Producto</button>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock %}

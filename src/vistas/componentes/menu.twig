@@ -20,5 +20,13 @@
 </header>
 
 {%  if usuario().administrador %}
-    <p>Adminsitrador</p>
+    <div id="encabezado-admin">
+        <div class="contenido">
+            <ul>
+                <li>
+                    <a href="/admin/producto-nuevo"><i class="fas fa-plus"></i> Agregar Producto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 {% endif %}
