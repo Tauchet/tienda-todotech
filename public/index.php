@@ -12,8 +12,12 @@ $loader = new FilesystemLoader('../src/vistas');
 $twig = new Environment($loader);
 $twig->addExtension(new HtmlExtension());
 
-$twig->addFunction(new TwigFunction("url", function($url) {
-    return $_ENV['BASE_URL'].$url;
+$twig->addFunction(new TwigFunction("url", function(...$path) {
+    $url = $_ENV['BASE_URL'];
+    foreach ($path as $arg) {
+        $url .= $arg;
+    }
+    return $url;
 }));
 
 $twig->addFunction(new TwigFunction("usuario", function() {
