@@ -5,7 +5,9 @@ namespace Middlewares;
 class UsuarioMiddleware {
 
     public static function sessionActiva() {
-        session_start();
+        if(!isset($_SESSION)) {
+            session_start();
+        }
         return isset($_SESSION) && isset($_SESSION['usuario_id']);
     }
 

@@ -4,6 +4,7 @@
         "twig/html-extra": "^3.3",
         "altorouter/altorouter": "1.1.0",
         "bramus/router": "~1.5",
-      "ext-mysqli": "*"
+        "vlucas/phpdotenv": "^5.3",
+        "ext-mysqli": "*"
     }
 }

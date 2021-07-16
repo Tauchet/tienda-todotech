@@ -2,7 +2,7 @@
 
 {% block title %}Nuevo Producto{% endblock %}
 {% block metadata %}
-    <link rel="stylesheet" href="/public/assets/producto-editor/estilos.css">
+    <link rel="stylesheet" href="{{ url("/public/assets/producto-editor/estilos.css") }}">
 {% endblock %}
 
 {% block content %}
@@ -20,8 +20,8 @@
                     <p>El producto fue generado con el código <strong>#{{ producto_codigo }}</strong></p>
                 </div>
                 <div class="resultado-opciones">
-                    <a href="/" class="btn info">Ver los productos</a>
-                    <a href="/admin/producto-nuevo" class="btn info">Agregar otro</a>
+                    <a href="{{ url("/") }}" class="btn info">Ver los productos</a>
+                    <a href="{{ url("/admin/producto-nuevo") }}" class="btn info">Agregar otro</a>
                 </div>
             </div>
         {% else %}

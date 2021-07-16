@@ -1,10 +1,11 @@
 <?php
 
+
 function conectar() {
-    $servidor = "localhost";
-    $usuario = "root";
-    $contrasenia = "";
-    $db = "software";
+    $servidor = $_ENV['MYSQL_SERVIDOR'];
+    $usuario = $_ENV['MYSQL_USUARIO'];
+    $contrasenia = $_ENV['MYSQL_CONTRASENIA'];
+    $db = $_ENV['MYSQL_DATABASE'];
     return mysqli_connect($servidor, $usuario, $contrasenia, $db);
 }
 

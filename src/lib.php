@@ -16,7 +16,7 @@ function renderizar($template, $params = []) {
 }
 
 function redireccionar($path) {
-    header('Location: ' .$path, true);
+    header('Location: ' .$_ENV['BASE_URL'].$path, true);
     exit();
 }
 

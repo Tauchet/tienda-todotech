@@ -2,7 +2,7 @@
 
 {% block title %}Inicio{% endblock %}
 {% block metadata %}
-    <link rel="stylesheet" href="/public/assets/inicio/estilos.css">
+    <link rel="stylesheet" href="{{ url("/public/assets/inicio/estilos.css") }}">
 {% endblock %}
 
 {% block content %}
@@ -27,7 +27,7 @@
         <div class="productos">
             {% for i, producto in productos %}
                 <div class="producto">
-                    <a href="/producto/{{ producto.id }}">
+                    <a href="{{ url("/producto/" + producto.id ) }}">
                         <div class="producto__nombre">
                             <p>{{ producto.nombre }}</p>
                         </div>
@@ -47,5 +47,5 @@
 
 
 {% block scripts %}
-    <script src="/public/assets/inicio/busqueda.js"></script>
+    <script src="{{ url("/public/assets/inicio/busqueda.js") }}"></script>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% block title %}Iniciar Sesión{% endblock %}
 {% block metadata %}
-    <link rel="stylesheet" href="/public/assets/login/estilos.css">
+    <link rel="stylesheet" href="{{ url("/public/assets/login/estilos.css") }}">
 {% endblock %}
 
 {% block content %}
@@ -31,7 +31,7 @@
             </div>
             <div class="aviso">
                 <button class="btn">Iniciar Sesión</button>
-                <p>¿Eres nuevo aquí? <a href="/registro">Registrarse</a></p>
+                <p>¿Eres nuevo aquí? <a href="{{ url("/registro") }}">Registrarse</a></p>
             </div>
         </form>
     </div>
