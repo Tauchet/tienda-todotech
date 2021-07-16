@@ -116,7 +116,6 @@ header {
 header > .contenido {
     display: flex;
     align-items: center;
-    padding: 1.5rem 0;
 }
 
 .header-contenido {
@@ -138,6 +137,7 @@ header .cerrar-sesion {
 
 header .cerrar-sesion a {
     color: rgba(255,255,255,0.6);
+
 }
 
 .input-custom__contenido {
