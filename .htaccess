@@ -4,4 +4,4 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_URI} !/public
 RewriteRule ^(.*)$ public/index.php/$1 [L]
-# Direct all requests to /public folder
+# Direct all requests to /public folderz

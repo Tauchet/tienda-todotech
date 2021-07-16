@@ -1,9 +1,9 @@
 <?php
 
 function conectar() {
-    $servidor = "db";
+    $servidor = "localhost";
     $usuario = "root";
-    $contrasenia = "12345";
+    $contrasenia = "";
     $db = "software";
     return mysqli_connect($servidor, $usuario, $contrasenia, $db);
 }

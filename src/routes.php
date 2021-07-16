@@ -3,7 +3,7 @@
 use Bramus\Router\Router;
 
 $router = new Router();
-$router->setBasePath("");
+$router->setBasePath("/tienda-todotech/");
 
 
 $router->get("/login", "\\Controllers\\LoginController@mostrar");
