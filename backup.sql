@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: db
--- Tiempo de generación: 16-07-2021 a las 20:18:46
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 17-07-2021 a las 18:58:41
 -- Versión del servidor: 8.0.25
--- Versión de PHP: 7.4.20
+-- Versión de PHP: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,14 +31,28 @@ CREATE TABLE `direcciones` (
   `usuario_id` int NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `direccion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `direcciones`
 --
 
 INSERT INTO `direcciones` (`usuario_id`, `nombre`, `direccion`) VALUES
-(1, 'Hogar', 'Cra 19 11N 33');
+(1, 'Hogar', 'Cra 19 11N 33'),
+(4, 'Hogar', 'cra 20 #3n ');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `garantias`
+--
+
+CREATE TABLE `garantias` (
+  `id` int NOT NULL,
+  `codigo` int NOT NULL,
+  `problema` varchar(100) NOT NULL,
+  `descripcion` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -51,7 +65,7 @@ CREATE TABLE `productos` (
   `nombre` varchar(100) NOT NULL,
   `descripcion` text NOT NULL,
   `precio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -75,18 +89,19 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`) VALUES
 
 CREATE TABLE `usuarios` (
   `id` int NOT NULL,
-  `nombre` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `correo` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `correo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `administrador` int NOT NULL DEFAULT '0',
   `contrasenia` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `administrador`, `contrasenia`) VALUES
-(1, 'Cristian', 'cristian0415@gmail.com', 1, '123456');
+(1, 'Cristian', 'cristian0415@gmail.com', 1, '123456'),
+(4, 'Henry Guillen', 'henry01@gmail.com', 0, 'f4139d5e132b7375ac82c7e31fb957aa');
 
 --
 -- Índices para tablas volcadas
@@ -97,6 +112,12 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `administrador`, `contrasenia`
 --
 ALTER TABLE `direcciones`
   ADD KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `garantias`
+--
+ALTER TABLE `garantias`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `productos`
@@ -117,6 +138,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `garantias`
+--
+ALTER TABLE `garantias`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
@@ -126,7 +153,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
