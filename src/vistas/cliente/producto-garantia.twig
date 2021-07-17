@@ -1,6 +1,6 @@
 {% extends "base.twig" %}
 
-{% block title %}Nuevo Producto{% endblock %}
+{% block title %}Garantía de Producto{% endblock %}
 {% block metadata %}
     <link rel="stylesheet" href="{{ url("/public/assets/producto-editor/estilos.css") }}">
 {% endblock %}
@@ -16,12 +16,11 @@
                     <p><i class="fas fa-check-circle fa-8x"></i></p>
                 </div>
                 <div class="resultado-contenido">
-                    <h2>¡Producto creado!</h2>
-                    <p>El producto fue generado con el código <strong>#{{ producto_codigo }}</strong></p>
+                    <h2>¡Petición enviada!</h2>
+                    <p>La solicitud de garantía fue enviada con éxito</p>
                 </div>
                 <div class="resultado-opciones">
-                    <a href="{{ url("/") }}" class="btn info">Ver los productos</a>
-                    <a href="{{ url("/admin/producto-nuevo") }}" class="btn info">Agregar otro</a>
+                    <a href="{{ url("/") }}" class="btn info">Volver al inicio</a>
                 </div>
             </div>
         {% else %}
@@ -38,12 +37,27 @@
             <form method="post">
                 <div class="form-group">
                     <div class="input-custom">
-                        <label class="input-custom__label" for="nombre">Nombre</label>
+                        <label class="input-custom__label" for="nombre">Código</label>
                         <div class="input-custom__contenido">
                             <div class="input-custom__icono">
                                 <i class="fas fa-tag"></i>
                             </div>
-                            <input minlength="10" value="{{ nombre }}" type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre del producto" required>
+                            <input minlength="10" value="{{ codigo }}" type="text" name="codigo" id="codigo" placeholder="Ingresa el código del producto" required>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="input-custom">
+                        <label class="input-custom__label" for="descripcion">Problema</label>
+                        <div class="input-custom__contenido">
+                            <div class="input-custom__icono">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <select name="problema" id="problema" required>
+                                <option value="El dispositivo dejó de funcionar">El dispositivo dejo de funcionar</option>
+                                <option value="El dispositivo tiene desperfectos en el acabado">El dispositivo tiene desperfectos en el acabado</option>
+                                <option value="No me llegó el producto esperado">No me llegó el producto esperado</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -54,24 +68,11 @@
                             <div class="input-custom__icono">
                                 <i class="fas fa-scroll"></i>
                             </div>
-                            <textarea minlength="10" rows="4" value="{{ descripcion }}" type="text" name="descripcion" id="descripcion" placeholder="Ingresa la descripción" required></textarea>
+                            <textarea minlength="10" rows="4" value="{{ descripcion }}" type="text" name="descripcion" id="descripcion" placeholder="Cuentanos el motivo de solicitar la garantía" required></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="input-custom">
-                        <label class="input-custom__label" for="precio">Precio</label>
-                        <div class="input-custom__contenido">
-                            <div class="input-custom__icono">
-                                <i class="fas fa-dollar-sign"></i>
-                            </div>
-                            <input min="1" value="{{ precio }}" type="number" name="precio" id="precio" placeholder="Ingresa el precio" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-center">
-                    <button class="btn">Agregar Producto</button>
-                </div>
+
             </form>
         {% endif %}
     </div>

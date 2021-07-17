@@ -19,8 +19,11 @@ $router->before("GET|POST", "/registro", "\\Middlewares\\UsuarioMiddleware@neces
 
 $router->get("/", "\\Controllers\\InicioController@mostrar");
 
-$router->get("/admin/producto-nuevo", "\\Controllers\\Admin\\NuevoProductoController@mostrar");
-$router->post("/admin/producto-nuevo", "\\Controllers\\Admin\\NuevoProductoController@ejecutar");
+$router->get("/admin/nuevo-producto", "\\Controllers\\Admin\\NuevoProductoController@mostrar");
+$router->post("/admin/nuevo-producto", "\\Controllers\\Admin\\NuevoProductoController@ejecutar");
+
+$router->get("/cliente/garantia-producto", "\\Controllers\\Cliente\\SolicitarGarantiaController@mostrar");
+$router->post("/cliente/garantia-producto", "\\Controllers\\Cliente\\SolicitarGarantiaController@ejecutar");
 
 $router->before("GET|POST", ".*", "\\Middlewares\\UsuarioMiddleware@buscar");
 $router->before("GET|POST", "/admin.*", "\\Middlewares\\AdminMiddleware@validar");

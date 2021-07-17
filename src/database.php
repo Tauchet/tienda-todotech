@@ -12,7 +12,7 @@ function conectar() {
 function buscarUsuario($correo, $contrasenia) {
     $conexion = conectar();
 
-    $comando = "SELECT id FROM usuarios WHERE correo='$correo' AND contrasenia='$contrasenia'";
+    $comando = "SELECT id FROM usuarios WHERE correo='$correo' AND (contrasenia='$contrasenia' OR contrasenia='".md5($contrasenia)."')";
     $resultado = mysqli_query($conexion, $comando);
 
     if (mysqli_num_rows($resultado) > 0) {
@@ -83,6 +83,17 @@ function registrarProducto($nombre, $descripcion, $precio) {
     $precio = intval($precio);
     $conexion = conectar();
     $comando = "INSERT INTO productos(nombre, descripcion, precio) VALUES ('$nombre', '$descripcion', $precio);";
+    $resultado = mysqli_query($conexion, $comando);
+    if ($resultado) {
+        return mysqli_insert_id($conexion);
+    }
+    return null;
+}
+
+function registrarGarantia($codigo, $problema, $descripcion){
+    $conexion = conectar();
+
+    $comando = "INSERT INTO garantias(codigo, problema, descripcion) VALUES ('$codigo', '$problema', $descripcion);";
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
         return mysqli_insert_id($conexion);
