@@ -79,15 +79,41 @@ function buscarProductos($busqueda = null): array {
 
 }
 
-function registrarProducto($nombre, $descripcion, $precio) {
-    $precio = intval($precio);
+function buscarProducto($id) {
+
     $conexion = conectar();
-    $comando = "INSERT INTO productos(nombre, descripcion, precio) VALUES ('$nombre', '$descripcion', $precio);";
+    $comando = "SELECT * FROM productos WHERE `id`=$id";
+    $peticion =  mysqli_query($conexion, $comando);
+    if (mysqli_num_rows($peticion) > 0) {
+        return mysqli_fetch_assoc($peticion);
+    }
+
+    return null;
+
+}
+
+function registrarProducto($nombre, $descripcion, $precio, $stock) {
+    $precio = intval($precio);
+    $stock = intval($stock);
+    $conexion = conectar();
+    $comando = "INSERT INTO productos(nombre, descripcion, precio, stock) VALUES ('$nombre', '$descripcion', $precio, $stock);";
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
         return mysqli_insert_id($conexion);
     }
     return null;
+}
+
+function actualizarProducto($productoId, $nombre, $descripcion, $precio, $stock) {
+    $precio = intval($precio);
+    $stock = intval($stock);
+    $conexion = conectar();
+    $comando = "UPDATE productos SET nombre='$nombre', descripcion='$descripcion', precio=$precio, stock=$stock WHERE `id`=$productoId";
+    $resultado = mysqli_query($conexion, $comando);
+    if ($resultado) {
+        return true;
+    }
+    return false;
 }
 
 function registrarGarantia($codigo, $problema, $descripcion){

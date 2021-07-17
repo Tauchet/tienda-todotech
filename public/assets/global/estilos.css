@@ -108,6 +108,20 @@ input {
     color: #f1c9c7;
 }
 
+.alerta.correcto {
+    background: #2ECC71;
+    color: whitesmoke;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    border: 5px solid transparent;
+    border-left-color: #239B56;
+}
+
+.alerta.correcto .alerta-header {
+    color: #ABEBC6;
+}
+
 header {
     background: #34495E;
     color: whitesmoke;

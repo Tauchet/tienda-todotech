@@ -20,12 +20,20 @@ $twig->addFunction(new TwigFunction("url", function(...$path) {
     return $url;
 }));
 
+$twig->addFunction(new TwigFunction("echoIf", function($conditional, $valueTrue, $valueFalse) {
+    if (isset($conditional)) {
+        return $valueTrue;
+    }
+    return $valueFalse;
+}));
+
 $twig->addFunction(new TwigFunction("usuario", function() {
     if (isset($_REQUEST['user'])) {
         return $_REQUEST['user'];
     }
     return null;
 }));
+
 
 $dotenv = Dotenv\Dotenv::createImmutable('../');
 $dotenv->load();

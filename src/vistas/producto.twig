@@ -1,0 +1,31 @@
+{% extends "base.twig" %}
+
+{% block title %}Producto / {{ producto.nombre }}{% endblock %}
+{% block metadata %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% include "componentes/menu.twig" %}
+
+    <div class="contenido">
+        {% if completado %}
+            <div class="resultado">
+                <div class="resultado-icon">
+                    <p><i class="fas fa-check-circle fa-8x"></i></p>
+                </div>
+                <div class="resultado-contenido">
+                    <h2>¡Petición enviada!</h2>
+                    <p>La solicitud de garantía fue enviada con éxito</p>
+                </div>
+                <div class="resultado-opciones">
+                    <a href="{{ url("/") }}" class="btn info">Volver al inicio</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="{{ url("/admin/editar-producto/", producto.id) }}">Editar producto</a>
+        {% endif %}
+    </div>
+
+{% endblock %}
