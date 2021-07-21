@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2021 a las 18:58:41
--- Versión del servidor: 8.0.25
--- Versión de PHP: 8.0.7
+-- Tiempo de generación: 21-07-2021 a las 23:19:13
+-- Versión del servidor: 10.4.20-MariaDB
+-- Versión de PHP: 7.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,18 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `direcciones` (
-  `usuario_id` int NOT NULL,
+  `usuario_id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `direccion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `direcciones`
 --
 
 INSERT INTO `direcciones` (`usuario_id`, `nombre`, `direccion`) VALUES
-(1, 'Hogar', 'Cra 19 11N 33'),
-(4, 'Hogar', 'cra 20 #3n ');
+(1, 'Hogar', 'Cra 19 11N 33');
 
 -- --------------------------------------------------------
 
@@ -48,11 +47,11 @@ INSERT INTO `direcciones` (`usuario_id`, `nombre`, `direccion`) VALUES
 --
 
 CREATE TABLE `garantias` (
-  `id` int NOT NULL,
-  `codigo` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL,
   `problema` varchar(100) NOT NULL,
   `descripcion` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -61,25 +60,26 @@ CREATE TABLE `garantias` (
 --
 
 CREATE TABLE `productos` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` text NOT NULL,
-  `precio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `precio` int(11) NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`) VALUES
-(1, 'PC Proaso 3000', 'Un computador construido en la nasa', 100000),
-(2, 'PC Proaso 5000', 'Esto es una descripción del producto, aún es n00b.', 50000),
-(3, 'Prueba', 'sdfsdfo;jshdflkjsdfhkjsdhfaskjfhsajkdfashdfkjashfkjsfhsjkfhkjsdfhjksdfhskjdfhskdjfhksjdfhskjfhsjkdfhsjkdfhskjdfhakdfjhasfkjahsfjkhsdkfhsakjdfhskjdfhskjdfhaskjdfhaskdfhadfkjahsdfkhskdjfhksjdfhksjdf', 11),
-(4, 'Cristian Camilo', 'Hola mundo!', 6506540),
-(5, 'Cristian Camilo', 'Hola mundo!', 6506540),
-(6, 'Bedoya Time', 'Hola mundo!', 100000),
-(7, 'Bedoya Time', 'Hola mundo!', 100000),
-(8, 'RAM x64 - PC Master', '64 GB - Holaaa', 10000);
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`) VALUES
+(1, 'PC Proaso 3000', 'Un computador construido en la nasa', 100000, 0),
+(2, 'PC Proaso 5000', 'Esto es una descripción del producto, aún es n00b.', 50000, 1),
+(3, 'Prueba', 'sdfsdfo;jshdflkjsdfhkjsdhfaskjfhsajkdfashdfkjashfkjsfhsjkfhkjsdfhjksdfhskjdfhskdjfhksjdfhskjfhsjkdfhsjkdfhskjdfhakdfjhasfkjahsfjkhsdkfhsakjdfhskjdfhskjdfhaskjdfhaskdfhadfkjahsdfkhskdjfhksjdfhksjdf', 11, 1),
+(4, 'Cristian Camilo', 'Hola mundo!', 6506540, 0),
+(5, 'Cristian Camilo', 'Hola mundo!', 6506540, 1),
+(6, 'Bedoya Time', 'Hola mundo!', 100000, 1),
+(7, 'Bedoya Time', 'Hola mundo!', 100000, 1),
+(8, 'RAM x64 - PC Master', '64 GB - Holaaa', 10000, 0);
 
 -- --------------------------------------------------------
 
@@ -88,20 +88,74 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`) VALUES
 --
 
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL,
-  `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `correo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `administrador` int NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `administrador` int(11) NOT NULL DEFAULT 0,
   `contrasenia` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `administrador`, `contrasenia`) VALUES
-(1, 'Cristian', 'cristian0415@gmail.com', 1, '123456'),
-(4, 'Henry Guillen', 'henry01@gmail.com', 0, 'f4139d5e132b7375ac82c7e31fb957aa');
+(1, 'Cristian', 'cristian0415@gmail.com', 1, '123456');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_compra` timestamp NOT NULL DEFAULT current_timestamp(),
+  `direccion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`id`, `usuario_id`, `fecha_compra`, `direccion`) VALUES
+(1, 1, '2021-07-21 20:49:21', 'Cra 19 11N 33'),
+(2, 1, '2021-07-21 20:50:16', 'Cra 19 11N 33'),
+(3, 1, '2021-07-21 20:53:17', 'Cra 19 11N 33'),
+(4, 1, '2021-07-21 20:55:06', 'Cra 19 11N 33'),
+(5, 1, '2021-07-21 20:58:26', 'Cra 19 11N 33'),
+(6, 1, '2021-07-21 20:58:47', 'Cra 19 11N 33'),
+(7, 1, '2021-07-21 20:58:50', 'Cra 19 11N 33'),
+(8, 1, '2021-07-21 21:08:05', 'Cra 19 11N 33'),
+(9, 1, '2021-07-21 21:08:13', 'Cra 19 11N 33'),
+(10, 1, '2021-07-21 21:08:49', 'Cra 19 11N 33');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas_producto`
+--
+
+CREATE TABLE `ventas_producto` (
+  `venta_id` int(11) NOT NULL,
+  `producto_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ventas_producto`
+--
+
+INSERT INTO `ventas_producto` (`venta_id`, `producto_id`, `cantidad`) VALUES
+(3, 2, 1),
+(3, 4, 1),
+(4, 2, 1),
+(4, 4, 1),
+(5, 2, 1),
+(5, 4, 1),
+(6, 8, 1),
+(10, 2, 9);
 
 --
 -- Índices para tablas volcadas
@@ -134,6 +188,12 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `correo` (`correo`);
 
 --
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -141,19 +201,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `garantias`
 --
 ALTER TABLE `garantias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
