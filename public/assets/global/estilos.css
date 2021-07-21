@@ -74,6 +74,7 @@ input {
 }
 
 .btn {
+    display: inline-block;
     background: #11C359;
     color: white;
     padding: 0.5rem 1.8rem;
@@ -142,16 +143,33 @@ header > .contenido {
     max-width: 1280px;
 }
 
-header .cerrar-sesion {
+.header-opciones {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+header .opcion {
     background: rgba(0,0,0,.2);
     border-radius: 0.5rem;
     color: whitesmoke;
     padding: 1rem;
 }
 
-header .cerrar-sesion a {
+header .opcion a {
     color: rgba(255,255,255,0.6);
+    text-decoration: none;
+}
 
+header .opcion.color a {
+    color: rgba(255,255,255,0.9);
+}
+
+header .opcion label {
+    background: rgba(0,0,0,.7);
+    padding: 0.3rem 0.5rem ;
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .input-custom__contenido {
@@ -244,4 +262,43 @@ header .cerrar-sesion a {
 
 .form-group-center {
     text-align: center;
+}
+
+.caja-resultado {
+    padding: 2rem;
+    margin: auto;
+    min-width: 600px;
+    text-align: center;
+    border-radius: 0.5rem;
+    background: #e3e3e3;
+}
+
+.caja-resultado-contenido {
+    margin: 1rem 0;
+}
+
+.carrito {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.carrito-opcion button {
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.4)
+}
+
+.carrito-anadir button {
+    background: #2ECC71;
+}
+
+.carrito-eliminar button {
+    background: #C0392B;
 }

@@ -5,6 +5,10 @@ use Bramus\Router\Router;
 $router = new Router();
 $router->setBasePath("/tienda-todotech/");
 
+$router->get("/carrito", "\\Controllers\\CarritoController@mostrar");
+$router->post("/carrito", "\\Controllers\\CarritoController@formulario");
+$router->post("/carrito-cantidad", "\\Controllers\\CarritoController@cantidad");
+$router->before("GET|POST", "/carrito", "\\Middlewares\\UsuarioMiddleware@esUsuario");
 
 $router->get("/login", "\\Controllers\\LoginController@mostrar");
 $router->post("/login", "\\Controllers\\LoginController@ejecutar");
@@ -14,8 +18,8 @@ $router->post("/registro", "\\Controllers\\RegistroController@ejecutar");
 
 $router->get("/logout", "\\Controllers\\LogoutController@ejecutar");
 
-$router->before("GET|POST", "/login", "\\Middlewares\\UsuarioMiddleware@necesitaAutentificar");
-$router->before("GET|POST", "/registro", "\\Middlewares\\UsuarioMiddleware@necesitaAutentificar");
+$router->before("GET|POST", "/login", "\\Middlewares\\UsuarioMiddleware@esInvitado");
+$router->before("GET|POST", "/registro", "\\Middlewares\\UsuarioMiddleware@esInvitado");
 
 $router->get("/", "\\Controllers\\InicioController@mostrar");
 

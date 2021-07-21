@@ -29,12 +29,19 @@ function buscarUsuarioInfo($uid) {
     $comando = "SELECT nombre, correo, administrador FROM usuarios WHERE id='$uid'";
     $resultado = mysqli_query($conexion, $comando);
     if (mysqli_num_rows($resultado) > 0) {
-        return mysqli_fetch_assoc($resultado);
+        $usuario = convertirArray($resultado);
+        $usuario['direccion'] = buscarDireccion($uid);
+        return $usuario;
     } else {
         // No se pudo encontrar el usuario.
         return null;
     }
 }
+
+function convertirArray($consulta) {
+    return json_decode(json_encode(mysqli_fetch_array($consulta)), true);
+}
+
 
 function registrarUsuario($nombre, $correo, $contrasenia, $direccion) {
     $conexion = conectar();
@@ -46,6 +53,15 @@ function registrarUsuario($nombre, $correo, $contrasenia, $direccion) {
         if (registrarDireccion($usuarioId, 'Hogar', $direccion)) {
             return $usuarioId;
         }
+    }
+    return null;
+}
+
+function buscarDireccion($uid) {
+    $conexion = conectar();
+    $resultado = mysqli_query($conexion, "SELECT direccion FROM direcciones WHERE usuario_id='$uid'");
+    if (mysqli_num_rows($resultado) > 0) {
+        return convertirArray($resultado)['direccion'];
     }
     return null;
 }
@@ -92,6 +108,21 @@ function buscarProducto($id) {
 
 }
 
+function buscarListaProductos($ids): array
+{
+    $resultado = array();
+    foreach ($ids as $productoId) {
+
+        if (is_int($productoId)) {
+            $producto = buscarProducto($productoId);
+            if ($producto !== null) {
+                $resultado[$productoId] = $producto;
+            }
+        }
+    }
+    return $resultado;
+}
+
 function registrarProducto($nombre, $descripcion, $precio, $stock) {
     $precio = intval($precio);
     $stock = intval($stock);
@@ -100,6 +131,29 @@ function registrarProducto($nombre, $descripcion, $precio, $stock) {
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
         return mysqli_insert_id($conexion);
+    }
+    return null;
+}
+
+function registrarVenta($uid, $direccion, $productos) {
+    $conexion = conectar();
+    $comando = "INSERT INTO ventas(usuario_id, direccion) VALUES ($uid, '$direccion');";
+    $resultado = mysqli_query($conexion, $comando);
+    if ($resultado) {
+        $ventaId = mysqli_insert_id($conexion);
+        $productosComprados = 0;
+        foreach ($productos as $producto) {
+            $productoId = $producto['producto']['id'];
+            $cantidad = $producto['cantidad'];
+            if (mysqli_query($conexion, "UPDATE `productos` SET `stock`=(IF(`stock`-$cantidad<0, 0, `stock`-$cantidad)) WHERE id=$productoId AND `stock`>=$cantidad;")) {
+                mysqli_query($conexion, "INSERT INTO ventas_producto(venta_id, producto_id, cantidad) VALUES ($ventaId, $productoId, $cantidad);");
+                $productosComprados++;
+            }
+        }
+        if ($productosComprados == 0) {
+            return -1;
+        }
+        return $ventaId;
     }
     return null;
 }

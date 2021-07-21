@@ -2,7 +2,7 @@
 
 {% block title %}Producto / {{ producto.nombre }}{% endblock %}
 {% block metadata %}
-
+    <link rel="stylesheet" href="{{ url("/public/assets/producto/estilos.css") }}">
 {% endblock %}
 
 {% block content %}
@@ -10,22 +10,58 @@
     {% include "componentes/menu.twig" %}
 
     <div class="contenido">
-        {% if completado %}
-            <div class="resultado">
-                <div class="resultado-icon">
-                    <p><i class="fas fa-check-circle fa-8x"></i></p>
+        <div class="producto-vista">
+            <div class="producto-vista__encabezado">
+                {% if usuario().administrador %}
+                    <div class="producto-vista__contenido">
+                        <a class="btn" href="{{ url("/admin/editar-producto/", producto.id) }}"><i class="fas fa-pencil-alt"></i> Editar producto</a>
+                    </div>
+                {% endif %}
+                <h1>{{ producto.nombre }}</h1>
+                <label for="#">{{ producto.stock }} en Stock</label>
+            </div>
+            <div class="producto-vista__contenido">
+
+                <div class="producto-vista__info">
+                    <div class="producto-vista__titulo">
+                        <h3>Descripción:</h3>
+                    </div>
+                    <div class="producto-vista__contenido">
+                        <p>{{ producto.descripcion }}</p>
+                    </div>
                 </div>
-                <div class="resultado-contenido">
-                    <h2>¡Petición enviada!</h2>
-                    <p>La solicitud de garantía fue enviada con éxito</p>
+                <div class="producto-vista__info">
+                    <div class="producto-vista__titulo">
+                        <h3>Precio:</h3>
+                    </div>
+                    <div class="producto-vista__contenido">
+                        <p>${{ producto.precio }}</p>
+                    </div>
                 </div>
-                <div class="resultado-opciones">
-                    <a href="{{ url("/") }}" class="btn info">Volver al inicio</a>
+                <div class="producto-vista__info">
+                    <div class="producto-vista__titulo">
+                        <h3>Carrito de Compras:</h3>
+                    </div>
+                    <div class="producto-vista__contenido">
+                        <div class="carrito" producto-id="{{ producto.id }}">
+                            <div class="carrito-opcion carrito-anadir">
+                                <button onclick="modificarCarrito('{{ producto.id }}', 1, {{ producto.stock }})"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <div class="carrito-cantidad">
+                                <input value="{{ carritoCantidad(producto.id) }}" type="number" disabled>
+                            </div>
+                            <div class="carrito-opcion carrito-eliminar">
+                                <button onclick="modificarCarrito('{{ producto.id }}', -1, {{ producto.stock }})"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <p class="carrito-notificacion"></p>
+                        </div>
+                        <div class="carrito-finalizar">
+                            <a href="{{ url("/carrito") }}" class="btn">Finalizar Compra</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        {% else %}
-            <a href="{{ url("/admin/editar-producto/", producto.id) }}">Editar producto</a>
-        {% endif %}
+        </div>
     </div>
 
 {% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.twig" %}
+
+{% block title %}Carrito{% endblock %}
+{% block metadata %}
+    <link rel="stylesheet" href="{{ url("/public/assets/carrito/estilos.css") }}">
+{% endblock %}
+
+{% block content %}
+
+    {% include "componentes/menu.twig" %}
+
+    <div class="contenido">
+        {% if completado %}
+            <div class="caja-resultado">
+                <div class="caja-resultado-icon">
+                    <p><i class="fas fa-check-circle fa-8x"></i></p>
+                </div>
+                <div class="caja-resultado-contenido">
+                    <h2>¡Compra Realizada!</h2>
+                    <p>La ordén de venta es <strong>#{{ completado }}</strong></p>
+                </div>
+                <div class="caja-resultado-opciones">
+                    <a href="{{ url("/") }}" class="btn info">Ir a Comprar</a>
+                </div>
+            </div>
+        {% elseif no_encontrados %}
+            <div class="caja-resultado">
+                <div class="caja-resultado-icon">
+                    <p><i class="fas fa-shopping-cart fa-8x"></i></p>
+                </div>
+                <div class="caja-resultado-contenido">
+                    <h2>¡No tienes productos seleccionados!</h2>
+                    <p>¡Disfruta de nuestra tienda!</p>
+                </div>
+                <div class="caja-resultado-opciones">
+                    <a href="{{ url("/") }}" class="btn info">Ir a Comprar</a>
+                </div>
+            </div>
+        {% elseif error %}
+            <div class="caja-resultado">
+                <div class="caja-resultado-icon">
+                    <p><i class="fas fa-exclamation-triangle fa-8x"></i></p>
+                </div>
+                <div class="caja-resultado-contenido">
+                    <h2>¡Ha ocurrido un error!</h2>
+                    <p>Volveremos pronto... Intentalo más tarde.</p>
+                </div>
+                <div class="caja-resultado-opciones">
+                    <a href="{{ url("/") }}" class="btn info">Ir a Comprar</a>
+                </div>
+            </div>
+        {% elseif vacio %}
+            <div class="caja-resultado">
+                <div class="caja-resultado-icon">
+                    <p><i class="fas fa-cart-arrow-down fa-8x"></i></p>
+                </div>
+                <div class="caja-resultado-contenido">
+                    <h2>¡El carrito está vacio!</h2>
+                </div>
+                <div class="caja-resultado-opciones">
+                    <a href="{{ url("/") }}" class="btn info">Ir a Comprar</a>
+                </div>
+            </div>
+        {% else %}
+            <h2>Lista de Artículos</h2>
+            <table>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Opciones</th>
+                </tr>
+                {% for i, producto in carrito %}
+                    <tr producto-id="{{ producto.producto.id }}">
+                        <td><a href="{{ url('/producto/', producto.producto.id) }}">{{ producto.producto.nombre }}</a></td>
+                        <td class="carrito-cantidad">{{ producto.cantidad }}</td>
+                        <td>$ {{ producto.producto.precio * producto.cantidad }}</td>
+                        <td>
+                            <div class="carrito">
+                                <div class="carrito-opcion carrito-anadir">
+                                    <button onclick="modificarCarrito('{{ producto.producto.id }}', 1, {{ producto.producto.stock }}, true)"><i class="fas fa-plus"></i></button>
+                                </div>
+
+                                <div class="carrito-opcion carrito-eliminar">
+                                    <button onclick="modificarCarrito('{{ producto.producto.id }}', -1, {{ producto.producto.stock }}, true)"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2">
+                        <a href="{{ url("/") }}" class="btn info">Seguir Comprando</a>
+                    </td>
+                    <td colspan="2">
+                        <h3 class="carrito-valor-total">$ {{ carrito_precio }}</h3>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <h2>Dirección</h2>
+            <p>{{ usuario().direccion }}</p>
+            <br>
+            <button class="btn" onclick="comprarProductos() ">Finalizar Compra</button>
+        {% endif %}
+    </div>
+
+    {% block scripts %}
+        <script src="{{ url("/public/assets/carrito/carrito.js") }}"></script>
+    {% endblock %}
+
+{% endblock %}

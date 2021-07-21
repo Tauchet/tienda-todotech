@@ -17,9 +17,15 @@ class UsuarioMiddleware {
         }
     }
 
-    public static function necesitaAutentificar() {
+    public static function esInvitado() {
         if (self::sessionActiva()) {
             redireccionar("/");
+        }
+    }
+
+    public static function esUsuario() {
+        if (!self::sessionActiva()) {
+            redireccionar("/login");
         }
     }
 

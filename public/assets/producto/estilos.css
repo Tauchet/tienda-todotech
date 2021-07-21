@@ -1,0 +1,28 @@
+#content > .contenido {
+    padding: 2rem 0;
+}
+
+.producto-vista__encabezado {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+}
+
+.producto-vista__info:not(:last-child) {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.carrito input {
+    text-align: center;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    border: none;
+
+    background: #ddd;
+}
+
+.carrito-finalizar {
+    margin-top: 1rem;
+}

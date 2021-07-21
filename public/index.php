@@ -34,6 +34,33 @@ $twig->addFunction(new TwigFunction("usuario", function() {
     return null;
 }));
 
+$twig->addFunction(new TwigFunction("carritoCantidad", function($productoId) {
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    if (!isset($_SESSION['carrito'])) {
+        return 0;
+    }
+    $carrito = $_SESSION['carrito'];
+    if (isset($carrito[$productoId])) {
+        return $carrito[$productoId];
+    }
+    return 0;
+}));
+
+$twig->addFunction(new TwigFunction("carritoObjetos", function() {
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    if (!isset($_SESSION['carrito'])) {
+        return 0;
+    }
+    $carrito = $_SESSION['carrito'];
+    return count($carrito);
+}));
+
+
+
 
 $dotenv = Dotenv\Dotenv::createImmutable('../');
 $dotenv->load();

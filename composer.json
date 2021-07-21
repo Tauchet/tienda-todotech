@@ -5,6 +5,7 @@
         "altorouter/altorouter": "1.1.0",
         "bramus/router": "~1.5",
         "vlucas/phpdotenv": "^5.3",
-        "ext-mysqli": "*"
+        "ext-mysqli": "*",
+      "ext-json": "*"
     }
 }
