@@ -16,7 +16,7 @@ function renderizar($template, $params = []) {
 }
 
 function redireccionar(...$path) {
-    $url = $_ENV['BASE_URL'];
+    $url = $_ENV['HOST_URL'];
     foreach ($path as $arg) {
         $url .= $arg;
     }

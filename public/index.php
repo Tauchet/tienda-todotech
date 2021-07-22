@@ -13,7 +13,7 @@ $twig = new Environment($loader);
 $twig->addExtension(new HtmlExtension());
 
 $twig->addFunction(new TwigFunction("url", function(...$path) {
-    $url = $_ENV['BASE_URL'];
+    $url = $_ENV['HOST_URL'];
     foreach ($path as $arg) {
         $url .= $arg;
     }

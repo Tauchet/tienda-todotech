@@ -194,7 +194,7 @@ function registrarVenta($uid, $direccion, $productos) {
             $cantidad = $producto['cantidad'];
             $productoPrecio = $cantidad * $producto['producto']['precio'];
             if (mysqli_query($conexion, "UPDATE `productos` SET `stock`=(IF(`stock`-$cantidad<0, 0, `stock`-$cantidad)) WHERE id=$productoId AND `stock`>=$cantidad;")) {
-                mysqli_query($conexion, "INSERT INTO ventas_producto(venta_id, producto_id, cantidad, precio_total) VALUES ($ventaId, $productoId, $cantidad, $productoPrecio);");
+                mysqli_query($conexion, "INSERT INTO ventas_producto(usuario_id, venta_id, producto_id, cantidad, precio_total) VALUES ($uid, $ventaId, $productoId, $cantidad, $productoPrecio);");
                 $productosComprados++;
             }
         }
