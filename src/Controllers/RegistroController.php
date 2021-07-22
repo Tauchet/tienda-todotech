@@ -57,7 +57,7 @@ class RegistroController {
         if ($usuarioId != NULL) {
             session_start();
             $_SESSION['usuario_id'] = $usuarioId;
-            redireccionar('/');
+            redireccionar();
             return;
         }
 

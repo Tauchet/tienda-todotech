@@ -2,7 +2,7 @@
 
 {% block title %}Garantía de Producto{% endblock %}
 {% block metadata %}
-    <link rel="stylesheet" href="{{ url("/public/assets/producto-editor/estilos.css") }}">
+    <link rel="stylesheet" href="{{ url("public/assets/producto-editor/estilos.css") }}">
 {% endblock %}
 
 {% block content %}
@@ -20,7 +20,7 @@
                     <p>La solicitud de garantía fue enviada con éxito</p>
                 </div>
                 <div class="resultado-opciones">
-                    <a href="{{ url("/") }}" class="btn info">Volver al inicio</a>
+                    <a href="{{ url('cliente/mis-compras/', venta_id) }}" class="btn info">Regresar a la venta.</a>
                 </div>
             </div>
         {% else %}
@@ -35,20 +35,9 @@
                 </div>
             {% endif %}
             <form method="post">
-                <div class="form-group">
-                    <div class="input-custom">
-                        <label class="input-custom__label" for="nombre">Código</label>
-                        <div class="input-custom__contenido">
-                            <div class="input-custom__icono">
-                                <i class="fas fa-tag"></i>
-                            </div>
-                            <input minlength="10" value="{{ codigo }}" type="text" name="codigo" id="codigo" placeholder="Ingresa el código del producto" required>
-                        </div>
-                    </div>
-                </div>
                 <div>
                     <div class="input-custom">
-                        <label class="input-custom__label" for="descripcion">Problema</label>
+                        <label class="input-custom__label" for="problema">Problema</label>
                         <div class="input-custom__contenido">
                             <div class="input-custom__icono">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -61,6 +50,7 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="form-group">
                     <div class="input-custom">
                         <label class="input-custom__label" for="descripcion">Descripción</label>
@@ -72,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-
+                <button class="btn">Solicitar Garantia</button>
             </form>
         {% endif %}
     </div>

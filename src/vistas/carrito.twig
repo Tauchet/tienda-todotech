@@ -2,7 +2,7 @@
 
 {% block title %}Carrito{% endblock %}
 {% block metadata %}
-    <link rel="stylesheet" href="{{ url("/public/assets/carrito/estilos.css") }}">
+    <link rel="stylesheet" href="{{ url("public/assets/carrito/estilos.css") }}">
 {% endblock %}
 
 {% block content %}
@@ -20,7 +20,7 @@
                     <p>La ordén de venta es <strong>#{{ completado }}</strong></p>
                 </div>
                 <div class="caja-resultado-opciones">
-                    <a href="{{ url("/") }}" class="btn info">Ir a Comprar</a>
+                    <a href="{{ url() }}" class="btn info">Ir a Comprar</a>
                 </div>
             </div>
         {% elseif no_encontrados %}
@@ -33,7 +33,7 @@
                     <p>¡Disfruta de nuestra tienda!</p>
                 </div>
                 <div class="caja-resultado-opciones">
-                    <a href="{{ url("/") }}" class="btn info">Ir a Comprar</a>
+                    <a href="{{ url() }}" class="btn info">Ir a Comprar</a>
                 </div>
             </div>
         {% elseif error %}
@@ -46,7 +46,7 @@
                     <p>Volveremos pronto... Intentalo más tarde.</p>
                 </div>
                 <div class="caja-resultado-opciones">
-                    <a href="{{ url("/") }}" class="btn info">Ir a Comprar</a>
+                    <a href="{{ url() }}" class="btn info">Ir a Comprar</a>
                 </div>
             </div>
         {% elseif vacio %}
@@ -58,7 +58,7 @@
                     <h2>¡El carrito está vacio!</h2>
                 </div>
                 <div class="caja-resultado-opciones">
-                    <a href="{{ url("/") }}" class="btn info">Ir a Comprar</a>
+                    <a href="{{ url() }}" class="btn info">Ir a Comprar</a>
                 </div>
             </div>
         {% else %}
@@ -72,9 +72,9 @@
                 </tr>
                 {% for i, producto in carrito %}
                     <tr producto-id="{{ producto.producto.id }}">
-                        <td><a href="{{ url('/producto/', producto.producto.id) }}">{{ producto.producto.nombre }}</a></td>
+                        <td><a href="{{ url('producto/', producto.producto.id) }}">{{ producto.producto.nombre }}</a></td>
                         <td class="carrito-cantidad">{{ producto.cantidad }}</td>
-                        <td>$ {{ producto.producto.precio * producto.cantidad }}</td>
+                        <td>$ {{ (producto.producto.precio * producto.cantidad)|number_format(0, '.', ',') }}</td>
                         <td>
                             <div class="carrito">
                                 <div class="carrito-opcion carrito-anadir">
@@ -90,10 +90,10 @@
                 {% endfor %}
                 <tr>
                     <td colspan="2">
-                        <a href="{{ url("/") }}" class="btn info">Seguir Comprando</a>
+                        <a href="{{ url() }}" class="btn info">Seguir Comprando</a>
                     </td>
                     <td colspan="2">
-                        <h3 class="carrito-valor-total">$ {{ carrito_precio }}</h3>
+                        <h3 class="carrito-valor-total">$ {{ carrito_precio|number_format(0, '.', ',') }}</h3>
                     </td>
                 </tr>
             </table>
@@ -106,7 +106,7 @@
     </div>
 
     {% block scripts %}
-        <script src="{{ url("/public/assets/carrito/carrito.js") }}"></script>
+        <script src="{{ url("public/assets/carrito/carrito.js") }}"></script>
     {% endblock %}
 
 {% endblock %}

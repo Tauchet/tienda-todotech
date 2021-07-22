@@ -20,6 +20,15 @@ $twig->addFunction(new TwigFunction("url", function(...$path) {
     return $url;
 }));
 
+
+$twig->addFunction(new TwigFunction("url_relativo", function(...$path) {
+    $url = $_SERVER['REQUEST_URI'];
+    foreach ($path as $arg) {
+        $url .= $arg;
+    }
+    return $url;
+}));
+
 $twig->addFunction(new TwigFunction("echoIf", function($conditional, $valueTrue, $valueFalse) {
     if (isset($conditional)) {
         return $valueTrue;

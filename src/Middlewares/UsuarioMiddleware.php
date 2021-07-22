@@ -19,13 +19,13 @@ class UsuarioMiddleware {
 
     public static function esInvitado() {
         if (self::sessionActiva()) {
-            redireccionar("/");
+            redireccionar();
         }
     }
 
     public static function esUsuario() {
         if (!self::sessionActiva()) {
-            redireccionar("/login");
+            redireccionar("login");
         }
     }
 

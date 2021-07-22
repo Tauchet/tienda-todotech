@@ -8,10 +8,13 @@
     padding-bottom: 1rem;
 }
 
+.producto-vista__info {
+    padding: 2rem 0;
+}
+
 .producto-vista__info:not(:last-child) {
-    margin-bottom: 1rem;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 0.5rem;
+
 }
 
 .carrito input {
@@ -19,10 +22,57 @@
     font-size: 1.1rem;
     border-radius: 0.5rem;
     border: none;
-
     background: #ddd;
 }
 
-.carrito-finalizar {
-    margin-top: 1rem;
+
+.producto-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.5rem;
+    color: white;
+    background: #373b44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #373b44, #4286f4); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #373b44, #4286f4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin: 1rem 0;
+    padding: 2rem;
+    top: 1rem;
+    position: sticky;
+}
+
+.producto-encabezado__valor {
+    color: whitesmoke;
+}
+
+.producto-administrador {
+    text-align: right;
+}
+
+.producto-vista__info.flex {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.carrito {
+    margin: 0;
+}
+
+.centrar {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.resenia {
+    padding: 1rem;
+    background: white;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.resenia-titulo {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
 }

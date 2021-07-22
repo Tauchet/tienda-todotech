@@ -95,6 +95,10 @@ input {
     background: #2185d0;
 }
 
+.btn.danger {
+    background: #E74C3C;
+}
+
 .alerta {
     background: #E74C3C;
     color: whitesmoke;
@@ -103,6 +107,7 @@ input {
     border-radius: 0.5rem;
     border: 5px solid transparent;
     border-left-color: #B53D31;
+    margin-bottom: 1rem;
 }
 
 .alerta-header {
@@ -254,6 +259,11 @@ header .opcion label {
 
 #encabezado-admin li a:hover {
     transform: scale(0.9);
+}
+
+#encabezado-admin li {
+    display: flex;
+    gap: 1rem;
 }
 
 .form-group:not(:last-child) {

@@ -8,15 +8,10 @@ class SolicitarGarantiaController {
         renderizar("cliente/producto-garantia");
     }
 
-    public static function ejecutar() {
+    public static function ejecutar($ventaId) {
 
         $error = false;
         $resultado = [];
-
-        if (estaVacio($_POST["codigo"])) {
-            $resultado['error_codigo'] = true;
-            $error = true;
-        }
 
         if (estaVacio($_POST["problema"])) {
             $resultado['error_problema'] = true;
@@ -34,9 +29,10 @@ class SolicitarGarantiaController {
             return;
         }
 
-        $garantiaId = registrarGarantia($_POST["codigo"], $_POST["problema"], $_POST["descripcion"]);
+
+        $garantiaId = registrarGarantia($ventaId, $_POST["problema"], $_POST["descripcion"]);
         if ($garantiaId != NULL) {
-            renderizar("cliente/producto-garantia", ['completado' => true, 'garantia_id' => $garantiaId]);
+            renderizar("cliente/producto-garantia", ['completado' => true, 'venta_id' => $ventaId]);
             return;
         }
 

@@ -180,7 +180,11 @@ function registrarProducto($nombre, $descripcion, $categoria,$precio, $stock) {
 
 function registrarVenta($uid, $direccion, $productos) {
     $conexion = conectar();
-    $comando = "INSERT INTO ventas(usuario_id, direccion) VALUES ($uid, '$direccion');";
+    $precioTotal = 0;
+    foreach ($productos as $producto) {
+        $precioTotal += $producto['cantidad'] * $producto['producto']['precio'];
+    }
+    $comando = "INSERT INTO ventas(usuario_id, direccion, precio_total) VALUES ($uid, '$direccion', $precioTotal);";
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
         $ventaId = mysqli_insert_id($conexion);
@@ -188,8 +192,9 @@ function registrarVenta($uid, $direccion, $productos) {
         foreach ($productos as $producto) {
             $productoId = $producto['producto']['id'];
             $cantidad = $producto['cantidad'];
+            $productoPrecio = $cantidad * $producto['producto']['precio'];
             if (mysqli_query($conexion, "UPDATE `productos` SET `stock`=(IF(`stock`-$cantidad<0, 0, `stock`-$cantidad)) WHERE id=$productoId AND `stock`>=$cantidad;")) {
-                mysqli_query($conexion, "INSERT INTO ventas_producto(venta_id, producto_id, cantidad) VALUES ($ventaId, $productoId, $cantidad);");
+                mysqli_query($conexion, "INSERT INTO ventas_producto(venta_id, producto_id, cantidad, precio_total) VALUES ($ventaId, $productoId, $cantidad, $productoPrecio);");
                 $productosComprados++;
             }
         }
@@ -198,6 +203,7 @@ function registrarVenta($uid, $direccion, $productos) {
         }
         return $ventaId;
     }
+    return null;
     return null;
 }
 
@@ -213,25 +219,28 @@ function actualizarProducto($productoId, $nombre, $descripcion, $categoria, $pre
     return false;
 }
 
-function registrarGarantia($codigo, $problema, $descripcion){
+function registrarGarantia($ventaId, $problema, $descripcion) {
     $conexion = conectar();
 
-    $comando = "INSERT INTO garantias(codigo, problema, descripcion) VALUES ('$codigo', '$problema', $descripcion);";
+    $comando = "UPDATE ventas SET garantia_problema='$problema', garantia_descripcion='$descripcion' WHERE `id`=$ventaId";
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
-        return mysqli_insert_id($conexion);
+        return true;
     }
-    return null;
+    return false;
 }
 
-function buscarVentas(){
+function buscarVentas($uid = null): array
+{
 
     $conexion = conectar();
+    $comando = "SELECT venta.*, usuario.nombre AS usuario_nombre, usuario.correo AS usuario_correo FROM `ventas` AS venta INNER JOIN `usuarios` AS usuario ON venta.usuario_id = usuario.id";
 
-    $comando = "SELECT * FROM `ventas`";
+    if ($uid !== null) {
+        $comando .= " WHERE `usuario_id`=$uid";
+    }
 
     $resultado = array();
-
     $peticion =  mysqli_query($conexion, $comando);
     if (mysqli_num_rows($peticion) > 0) {
         while($venta = mysqli_fetch_assoc($peticion)) {
@@ -242,22 +251,63 @@ function buscarVentas(){
     return $resultado;
 }
 
-function buscarProductoVenta($id){
+function buscarVenta($id): array
+{
 
     $conexion = conectar();
 
-    $comando = "SELECT * FROM ventas_producto INNER JOIN ventas ON ventas_producto.venta_id = ventas.id INNER JOIN usuarios ON ventas.usuario_id = usuarios.id 
-                INNER JOIN productos ON ventas_producto.producto_id = productos.id WHERE `venta_id`=$id";
-
-    $resultado = array();
-
-    $peticion =  mysqli_query($conexion, $comando);
+    $comando = "SELECT venta.*, usuario.nombre AS usuario_nombre, usuario.correo AS usuario_correo FROM `ventas` AS venta INNER JOIN `usuarios` AS usuario ON venta.usuario_id = usuario.id WHERE venta.id=$id";
+    $resultado = [];
+    $peticion = mysqli_query($conexion, $comando);
     if (mysqli_num_rows($peticion) > 0) {
-        while($ventaProducto = mysqli_fetch_assoc($peticion)) {
-            array_push($resultado, $ventaProducto);
+        $resultado['info'] = mysqli_fetch_assoc($peticion);
+
+        $comando = "SELECT lista_productos.cantidad, lista_productos.precio_total, productos.* FROM `ventas_producto` AS lista_productos INNER JOIN productos ON productos.id = lista_productos.producto_id WHERE lista_productos.venta_id=$id";
+        $peticion = mysqli_query($conexion, $comando);
+        $productos = [];
+        if (mysqli_num_rows($peticion) > 0) {
+            while($venta = mysqli_fetch_assoc($peticion)) {
+                array_push($productos, $venta);
+            }
         }
+        $resultado['productos'] = $productos;
+
     }
 
     return $resultado;
 }
 
+function esProductoComprado($productoId, $uid): bool {
+    $conexion = conectar();
+    $comando = "SELECT * FROM ventas_producto WHERE `producto_id`=$productoId AND `usuario_id`=$uid";
+    $peticion =  mysqli_query($conexion, $comando);
+    return mysqli_num_rows($peticion) > 0;
+}
+
+function buscarResenias($productoId, $uid): array {
+    $conexion = conectar();
+    $comando = "SELECT resenia.*, usuarios.nombre AS usuario_nombre FROM resenias AS resenia INNER JOIN usuarios ON usuarios.id=resenia.usuario_id WHERE resenia.producto_id=$productoId ORDER BY resenia.fecha ASC";
+    $resultado = array();
+    $encontrado = false;
+    $peticion = mysqli_query($conexion, $comando);
+    if (mysqli_num_rows($peticion) > 0) {
+        while($venta = mysqli_fetch_assoc($peticion)) {
+            array_push($resultado, $venta);
+            if ($venta['usuario_id'] === $uid) {
+                $encontrado = true;
+            }
+        }
+    }
+    return [$resultado, $encontrado];
+}
+
+function registrarResenia($productoId, $uid, $resenia): bool {
+    $conexion = conectar();
+    $comando = "INSERT INTO resenias(producto_id, usuario_id, resenia) VALUE ('$productoId', '$uid', '$resenia');";
+    $resultado = mysqli_query($conexion, $comando);
+    if($resultado){
+        return true;
+    }
+    return false;
+
+}

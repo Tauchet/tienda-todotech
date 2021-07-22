@@ -15,8 +15,12 @@ function renderizar($template, $params = []) {
     echo $GLOBALS["twig"]->render($template, $params);
 }
 
-function redireccionar($path) {
-    header('Location: ' .$_ENV['BASE_URL'].$path, true);
+function redireccionar(...$path) {
+    $url = $_ENV['BASE_URL'];
+    foreach ($path as $arg) {
+        $url .= $arg;
+    }
+    header('Location: ' .$url, true);
     exit();
 }
 

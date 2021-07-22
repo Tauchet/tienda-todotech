@@ -2,7 +2,7 @@
 
 {% block title %}Producto / {{ producto.nombre }}{% endblock %}
 {% block metadata %}
-    <link rel="stylesheet" href="{{ url("/public/assets/producto/estilos.css") }}">
+    <link rel="stylesheet" href="{{ url("public/assets/producto/estilos.css") }}">
 {% endblock %}
 
 {% block content %}
@@ -10,56 +10,106 @@
     {% include "componentes/menu.twig" %}
 
     <div class="contenido">
-        <div class="producto-vista">
-            <div class="producto-vista__encabezado">
-                {% if usuario().administrador %}
-                    <div class="producto-vista__contenido">
-                        <a class="btn" href="{{ url("/admin/editar-producto/", producto.id) }}"><i class="fas fa-pencil-alt"></i> Editar producto</a>
-                    </div>
-                {% endif %}
+        {% if usuario().administrador %}
+            <div class="producto-administrador">
+                <a class="btn" href="{{ url("admin/editar-producto/", producto.id) }}"><i class="fas fa-pencil-alt"></i>
+                    Editar producto</a>
+
+            </div>
+        {% endif %}
+        <div class="producto-encabezado">
+            <div class="producto-encabezado__titulo">
                 <h1>{{ producto.nombre }}</h1>
                 <label for="#">{{ producto.stock }} en Stock</label>
             </div>
-            <div class="producto-vista__contenido">
-
-                <div class="producto-vista__info">
-                    <div class="producto-vista__titulo">
-                        <h3>Descripción:</h3>
-                    </div>
-                    <div class="producto-vista__contenido">
-                        <p>{{ producto.descripcion }}</p>
-                    </div>
+            <div class="producto-encabezado__valor">
+                <h1>${{ producto.precio|number_format(0, '.', ',') }}</h1>
+            </div>
+        </div>
+        <div class="producto-vista">
+            <div class="producto-vista__info">
+                <div class="producto-vista__titulo">
+                    <h3>Descripción:</h3>
                 </div>
-                <div class="producto-vista__info">
-                    <div class="producto-vista__titulo">
-                        <h3>Precio:</h3>
-                    </div>
-                    <div class="producto-vista__contenido">
-                        <p>${{ producto.precio }}</p>
-                    </div>
+                <div class="producto-vista__contenido">
+                    <p>{{ producto.descripcion }}</p>
                 </div>
-                <div class="producto-vista__info">
+            </div>
+            {% if producto.stock > 0 %}
+                <div class="producto-vista__info flex">
                     <div class="producto-vista__titulo">
                         <h3>Carrito de Compras:</h3>
                     </div>
                     <div class="producto-vista__contenido">
                         <div class="carrito" producto-id="{{ producto.id }}">
                             <div class="carrito-opcion carrito-anadir">
-                                <button onclick="modificarCarrito('{{ producto.id }}', 1, {{ producto.stock }})"><i class="fas fa-plus"></i></button>
+                                <button onclick="modificarCarrito('{{ producto.id }}', 1, {{ producto.stock }})"><i
+                                            class="fas fa-plus"></i></button>
                             </div>
                             <div class="carrito-cantidad">
                                 <input value="{{ carritoCantidad(producto.id) }}" type="number" disabled>
                             </div>
                             <div class="carrito-opcion carrito-eliminar">
-                                <button onclick="modificarCarrito('{{ producto.id }}', -1, {{ producto.stock }})"><i class="fas fa-minus"></i></button>
+                                <button onclick="modificarCarrito('{{ producto.id }}', -1, {{ producto.stock }})"><i
+                                            class="fas fa-minus"></i></button>
                             </div>
                             <p class="carrito-notificacion"></p>
                         </div>
-                        <div class="carrito-finalizar">
-                            <a href="{{ url("/carrito") }}" class="btn">Finalizar Compra</a>
-                        </div>
                     </div>
                 </div>
+            {% endif %}
+
+            <div class="producto-vista__info">
+                <div class="producto-vista__titulo">
+                    <h3>Reseñas:</h3>
+                </div>
+                <div class="producto-vista__contenido">
+                    {% if resenia_completado or resenia_error %}
+                        <div class="{{html_classes('alerta', {correcto: resenia_completado})}}">
+                            <div class="alerta-header">
+                                <h3>{{ echoIf(resenia_completado, "¡COMPLETADO!", "¡ERROR!") }}</h3>
+                            </div>
+                            <div class="alerta-content">
+                                <p>{{ echoIf(resenia_completado, "Se ha registrado tu resenia correctamente.", "¡Intentalo más tarde!") }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if comprado_alguna_vez and not resenia_registrada %}
+                        <form method="POST">
+                            <div class="input-custom">
+                                <label class="input-custom__label" for="resenia">RESEÑA DE LA COMPRA DE ESTE
+                                    PRODUCTO</label>
+                                <div class="input-custom__contenido">
+                                    <div class="input-custom__icono">
+                                        <i class="fas fa-jedi"></i>
+                                    </div>
+                                    <textarea minlength="10" rows="4" type="text" name="resenia" id="resenia"
+                                              placeholder="Ingresa la reseña del producto."
+                                              required>{{ descripcion }}</textarea>
+                                </div>
+                            </div>
+                            <div class="centrar">
+                                <button class="btn">Agregar reseña</button>
+                            </div>
+                        </form>
+                    {% endif %}
+                    {% for i, resenia in resenias %}
+                        <div class="resenia">
+                            <div class="resenia-titulo">
+                                <h4>{{ resenia.usuario_nombre }}</h4>
+                                <p>{{ resenia.fecha }}</p>
+                            </div>
+                            <div class="resenia-contenido">
+                                <p>{{ resenia.resenia }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="carrito-finalizar">
+                <a href="{{ url("carrito") }}" class="btn info">Finalizar Compra</a>
             </div>
         </div>
     </div>

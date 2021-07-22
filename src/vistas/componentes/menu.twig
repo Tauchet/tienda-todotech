@@ -9,14 +9,17 @@
         <div class="header-opciones">
             {% if usuario() %}
                 <div class="carrito-opcion opcion color">
-                    <a href="{{ url("/carrito") }}"><i class="fas fa-shopping-cart"></i> Carrito <label for="#">{{ carritoObjetos() }}</label></a>
+                    <a href="{{ url("carrito") }}"><i class="fas fa-shopping-cart"></i> Carrito <label for="#">{{ carritoObjetos() }}</label></a>
+                </div>
+                <div class="carrito-opcion opcion color">
+                    <a href="{{ url("cliente/mis-compras") }}"><i class="fas fa-tags"></i> Mis Compras</a>
                 </div>
                 <div class="cerrar-sesion opcion">
                     <p><i class="fas fa-user"></i> Bienvenid@ {{ usuario().nombre }}</p>
-                    <a href="{{ url("/logout") }}">Cerrar Sesión</a>
+                    <a href="{{ url("logout") }}">Cerrar Sesión</a>
                 </div>
             {% else %}
-                <a class="btn" href="{{ url("/login") }}">Iniciar Sesión</a>
+                <a class="btn" href="{{ url("login") }}">Iniciar Sesión</a>
             {% endif %}
         </div>
     </div>
@@ -27,8 +30,8 @@
         <div class="contenido">
             <ul>
                 <li>
-                    <a href="{{ url("/admin/nuevo-producto") }}"><i class="fas fa-plus"></i> Agregar Producto</a>
-                    <a href="{{ url("/admin/gestion-ventas") }}"><i class="fas fa-plus"></i> Gestionar Ventas</a>
+                    <a href="{{ url("admin/nuevo-producto") }}"><i class="fas fa-plus"></i> Agregar Producto</a>
+                    <a href="{{ url("admin/gestion-ventas") }}"><i class="fas fa-boxes"></i> Gestionar Ventas</a>
                 </li>
             </ul>
         </div>

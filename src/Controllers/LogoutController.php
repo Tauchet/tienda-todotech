@@ -6,7 +6,7 @@ class LogoutController {
 
     public static function ejecutar() {
         session_destroy();
-        redireccionar("/");
+        redireccionar();
     }
 
 }

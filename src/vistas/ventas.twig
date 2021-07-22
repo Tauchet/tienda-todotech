@@ -1,0 +1,93 @@
+{% extends "base.twig" %}
+
+{% block title %}{{ titulo }}{% endblock %}
+{% block metadata %}
+    <link rel="stylesheet" href="{{ url("public/assets/venta/estilos.css") }}">
+{% endblock %}
+
+{% block content %}
+
+    {% include "componentes/menu.twig" %}
+
+    <div class="contenido">
+        {% if venta %}
+            <a href="./"><i class="fas fa-angle-left"></i> Regresar atrás</a>
+            {% if general %}
+                <section>
+                    <h4>CLIENTE</h4>
+                    <p>{{ venta.info.usuario_nombre }} ({{ venta.info.usuario_correo }})</p>
+                </section>
+            {% endif %}
+            <section>
+                <h4>FECHA</h4>
+                <p>{{ venta.info.fecha_compra }}</p>
+            </section>
+            <section>
+                <h4>DIRECCIÓN</h4>
+                <p>{{ venta.info.direccion }}</p>
+            </section>
+            <section>
+                <h4>VALOR</h4>
+                <p>${{ venta.info.precio_total|number_format(0, '.', ',') }}</p>
+            </section>
+            {% if venta.info.garantia_problema %}
+                <section>
+                    <h4>GARANTIA SOLICITADA</h4>
+                    <p><strong>Problema:</strong> {{ venta.info.garantia_problema }}</p>
+                    <p><strong>Descripción:</strong> {{ venta.info.garantia_descripcion }}</p>
+                </section>
+            {% elseif not general %}
+                <section>
+                    <a href="{{ url("cliente/garantia-venta/", venta.info.id) }}" class="btn info">Solicitar Garantia</a>
+                </section>
+            {% endif %}
+            <section>
+                <table>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                    {% for i, producto in venta.productos %}
+                        <tr>
+                            <td><a href="{{ url('producto/', producto.id) }}">{{ producto.nombre }}</a></td>
+                            <td>{{ producto.cantidad }}</td>
+                            <td>{{ producto.precio_total|number_format(0, '.', ',') }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </section>
+        {% else %}
+            <div class="ventas">
+                {% for i, venta in ventas %}
+                    <div class="{{ html_classes("venta-objeto", {general: general}) }}">
+                        <a href="{{ url_relativo("/", venta.id) }}">
+                            <div class="venta-fecha">
+                                <p><i class="fas fa-clock"></i> {{ venta.fecha_compra }}</p>
+                            </div>
+                            <div class="venta-id">
+
+                                <p><i class="fab fa-slack-hash"></i> {{ venta.id }}</p>
+                            </div>
+                            {% if general %}
+                                <div class="venta-autor">
+                                    <h4>USUARIO</h4>
+                                    <p>{{ venta.usuario_nombre }} ({{ venta.usuario_correo }})</p>
+                                </div>
+                            {% endif %}
+                            <div class="venta-direccion">
+                                <h4>DIRECCIÓN</h4>
+                                <p>{{ venta.direccion }}</p>
+                            </div>
+                            <div class="venta-precio">
+                                <h4>PRECIO</h4>
+                                <p>${{ venta.precio_total|number_format(0, '.', ',') }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
