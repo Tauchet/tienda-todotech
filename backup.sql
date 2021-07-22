@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-07-2021 a las 03:44:25
+-- Tiempo de generación: 22-07-2021 a las 08:31:24
 -- Versión del servidor: 8.0.25
 -- Versión de PHP: 8.0.7
 
@@ -31,7 +31,7 @@ CREATE TABLE `direcciones` (
   `usuario_id` int NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `direccion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `direcciones`
@@ -51,7 +51,7 @@ CREATE TABLE `garantias` (
   `codigo` int NOT NULL,
   `problema` varchar(100) NOT NULL,
   `descripcion` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -66,22 +66,22 @@ CREATE TABLE `productos` (
   `categoria` varchar(50) NOT NULL,
   `precio` int NOT NULL,
   `stock` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `categoria`, `precio`, `stock`) VALUES
-(1, 'PC Proaso 3000', 'Un computador construido en la nasa', 'computador', 100000, 0),
-(2, 'PC Proaso 5000', 'Esto es una descripción del producto, aún es n00b.', 'computador', 50000, 1),
-(3, 'Prueba', 'sdfsdfo;jshdflkjsdfhkjs', 'texto', 11, 1),
-(4, 'Cristian Camilo', 'Hola mundo!', 'texto', 6506540, 1),
-(5, 'Cristian Camilo', 'Hola mundo!', 'texto', 6506540, 1),
-(6, 'Bedoya Time', 'Hola mundo!', 'texto', 100000, 1),
-(7, 'Bedoya Time', 'Hola mundo!', 'texto', 100000, 1),
-(8, 'RAM x64 - PC Master', '64 GB - Holaaa', 'componente', 10000, 1),
-(9, 'Pc master race', 'super pc gg', 'computador', 20000, 2);
+(1, 'PC Core i5 7400f', 'Un computador perfecto para programar', 'computador', 2000000, 2),
+(2, 'PC Ryzen 5 5600x RTX 2060', 'Computador ideal para videojuegos y multitarea en general', 'computador', 4500000, 1),
+(3, 'Camara Sony 4k', 'Perfecta para captar los momentos que valen la pena', 'video', 3000000, 4),
+(4, 'Xbox Series s', 'Consola de alto rendimiento en 2k', 'consola', 1500000, 7),
+(5, 'Xbox series x ', 'La consola más potente del mundo, disfruta tus juegos en 4k', 'consola', 2500000, 3),
+(6, 'PlayStation 5', 'Disfruta de los videojuegos exclusivos de Sony en resolución 4k', 'consola', 3500000, 2),
+(7, 'iPhone 12 Pro Max 256 gb', 'El sistema de cámaras Pro te permite tomar fotos espectaculares con poca luz, y el iPhone 12 Pro Max lleva tu talento fotográfico mucho más allá.', 'celular', 5000000, 4),
+(8, '64 GB RAM DDR4', '4 módulos de 16 gb de ram a 3200 mhz', 'componente', 350000, 13),
+(9, 'Disco duro 1tb 7200rpm', 'Disco duro 1tb de 7200rpm, al mejor precio del mercado', 'computador', 175000, 23);
 
 -- --------------------------------------------------------
 
@@ -95,7 +95,7 @@ CREATE TABLE `usuarios` (
   `correo` varchar(100) NOT NULL,
   `administrador` int NOT NULL DEFAULT '0',
   `contrasenia` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -115,7 +115,7 @@ CREATE TABLE `ventas` (
   `usuario_id` int NOT NULL,
   `fecha_compra` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `direccion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `ventas`
@@ -132,7 +132,8 @@ INSERT INTO `ventas` (`id`, `usuario_id`, `fecha_compra`, `direccion`) VALUES
 (8, 1, '2021-07-21 21:08:05', 'Cra 19 11N 33'),
 (9, 1, '2021-07-21 21:08:13', 'Cra 19 11N 33'),
 (10, 1, '2021-07-21 21:08:49', 'Cra 19 11N 33'),
-(11, 1, '2021-07-21 22:22:25', 'Cra 19 11N 33');
+(11, 1, '2021-07-21 22:22:25', 'Cra 19 11N 33'),
+(12, 1, '2021-07-22 02:10:59', 'Cra 19 11N 33');
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,7 @@ CREATE TABLE `ventas_producto` (
   `venta_id` int NOT NULL,
   `producto_id` int NOT NULL,
   `cantidad` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `ventas_producto`
@@ -159,7 +160,9 @@ INSERT INTO `ventas_producto` (`venta_id`, `producto_id`, `cantidad`) VALUES
 (5, 4, 1),
 (6, 8, 1),
 (10, 2, 9),
-(11, 1, 1);
+(11, 1, 1),
+(12, 5, 1),
+(12, 6, 1);
 
 --
 -- Índices para tablas volcadas
@@ -223,7 +226,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
