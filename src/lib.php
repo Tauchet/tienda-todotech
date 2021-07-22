@@ -33,11 +33,8 @@ function obtenerUsuario() {
 }
 
 function estaVacio($value) {
-
-    if (!isset($value)) {
-        return true;
+    if ($value === "0") {
+        return false;
     }
-
-    return empty($value);
-
+    return $value === null || empty($value);
 }

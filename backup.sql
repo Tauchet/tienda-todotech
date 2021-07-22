@@ -31,7 +31,7 @@ CREATE TABLE `direcciones` (
   `usuario_id` int NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `direccion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `direcciones`
@@ -51,7 +51,7 @@ CREATE TABLE `garantias` (
   `codigo` int NOT NULL,
   `problema` varchar(100) NOT NULL,
   `descripcion` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE `productos` (
   `categoria` varchar(50) NOT NULL,
   `precio` int NOT NULL,
   `stock` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -95,7 +95,7 @@ CREATE TABLE `usuarios` (
   `correo` varchar(100) NOT NULL,
   `administrador` int NOT NULL DEFAULT '0',
   `contrasenia` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -115,7 +115,7 @@ CREATE TABLE `ventas` (
   `usuario_id` int NOT NULL,
   `fecha_compra` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `direccion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `ventas`
@@ -144,7 +144,7 @@ CREATE TABLE `ventas_producto` (
   `venta_id` int NOT NULL,
   `producto_id` int NOT NULL,
   `cantidad` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `ventas_producto`

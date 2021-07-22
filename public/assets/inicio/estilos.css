@@ -49,3 +49,23 @@
 .producto__precio {
     color: #5B5B5B;
 }
+
+.categoria a {
+    display: block;
+    border-radius: 0.5rem;
+    background: #ddd;
+    text-decoration: none;
+    color: #444;
+    padding: 0.5rem 1rem;
+}
+
+.categoria.activa a {
+    background: rgb(41, 58, 74);
+    color: whitesmoke;
+}
+
+.categorias {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+}

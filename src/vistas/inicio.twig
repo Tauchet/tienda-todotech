@@ -27,17 +27,15 @@
         </form>
 
 
-        {% for i, categoria in categorias %}
-            <div class="producto">
-                <a href="?categoria={{ categoria }}">
-                    <div class="producto__categoria">
+        <div class="categorias">
+            {% for i, categoria in categorias %}
+                <div class="{{ html_classes('categoria', {activa: categoria_actual == categoria}) }}">
+                    <a href="?categoria={{ categoria }}">
                         <p>#{{ categoria }}</p>
-                    </div>
-                </a>
-            </div>
-        {% endfor %}
-
-
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
 
 
         <div class="productos">

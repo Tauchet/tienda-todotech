@@ -22,6 +22,8 @@ class ProductoEditorController {
 
     public static function ejecutarEditar($productoId) {
 
+
+
         $error = false;
         $resultado = [];
 
@@ -50,7 +52,8 @@ class ProductoEditorController {
             $error = true;
         }
 
-        $resultado['producto_actual_codigo'] = '1';
+
+        $resultado['producto_actual_codigo'] = $productoId;
         $resultado['nombre'] = $_POST["nombre"];
         $resultado['descripcion'] = $_POST["descripcion"];
         $resultado['categoria'] = $_POST["categoria"];
@@ -58,12 +61,20 @@ class ProductoEditorController {
         $resultado['stock'] = $_POST["stock"];
 
         if ($error) {
-            $resultado['error'] = "¡Ha ocurrido un error con los datos ingresados!";
+            $resultado['alerta'] = "¡Ha ocurrido un error con los datos ingresados!";
             renderizar("admin/producto-editor", $resultado);
             return;
         }
 
-        $actualizado = actualizarProducto($productoId, $_POST["nombre"], $_POST["descripcion"], $_POST["categoria"], $_POST["precio"], $_POST["stock"]);
+
+
+        $actualizado = actualizarProducto($productoId,
+            $_POST["nombre"],
+            $_POST["descripcion"],
+            $_POST["categoria"],
+            $_POST["precio"],
+            $_POST["stock"]);
+
         if ($actualizado) {
             $resultado['completado'] = true;
             $resultado['alerta'] = "Se han guardado correctamente los cambios.";
@@ -71,7 +82,7 @@ class ProductoEditorController {
             return;
         }
 
-        $resultado['error'] = "¡No se ha encontrado el producto buscado!";
+        $resultado['alerta'] = "¡No se ha encontrado el producto buscado!";
         renderizar("admin/producto-editor", $resultado);
 
     }

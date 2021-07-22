@@ -59,9 +59,6 @@ $twig->addFunction(new TwigFunction("carritoObjetos", function() {
     return count($carrito);
 }));
 
-
-
-
 $dotenv = Dotenv\Dotenv::createImmutable('../');
 $dotenv->load();
 
