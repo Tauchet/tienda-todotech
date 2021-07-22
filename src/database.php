@@ -72,15 +72,55 @@ function registrarDireccion($uid, $nombre, $direccion) {
     return mysqli_query($conexion, $comando);
 }
 
-function buscarProductos($busqueda = null): array {
+
+function buscarCategorias() {
 
     $conexion = conectar();
 
-    if ($busqueda !== null) {
-        $comando = "SELECT * FROM `productos` WHERE `nombre` LIKE '%".$busqueda."%'";
-    } else {
-        $comando = "SELECT * FROM productos";
+    $comando = "SELECT distinct categoria FROM `productos`";
+
+    $resultado = array();
+    array_push($resultado, "Todas");
+
+    $peticion =  mysqli_query($conexion, $comando);
+    if (mysqli_num_rows($peticion) > 0) {
+        while($producto = mysqli_fetch_assoc($peticion)) {
+            array_push($resultado, $producto['categoria']);
+        }
     }
+
+    return $resultado;
+
+}
+
+
+function buscarProductos($busqueda = null, $categoria = "Todas"): array {
+
+    $conexion = conectar();
+
+    $comando = "SELECT * FROM productos";
+    $concatenado = false;
+
+    if ($busqueda !== null) {
+        if(!$concatenado){
+            $concatenado=true;
+            $comando .= " WHERE";
+        }
+        $comando .= " `nombre` LIKE '%".$busqueda."%'";
+
+    }
+    if ($categoria !== null && $categoria!="Todas") {
+        if(!$concatenado){
+            $concatenado=true;
+            $comando .= " WHERE";
+        }
+        else{
+            $comando .= " AND";
+        }
+        $comando .= " `categoria` = '".$categoria."'";
+
+    }
+
 
     $resultado = array();
 
@@ -95,28 +135,6 @@ function buscarProductos($busqueda = null): array {
 
 }
 
-function buscarProductosCategoria($busqueda = null): array {
-
-    $conexion = conectar();
-
-    if ($busqueda !== null) {
-        $comando = "SELECT distinct categoria FROM `productos` WHERE `nombre` LIKE '%".$busqueda."%'";
-    } else {
-        $comando = "SELECT distinct categoria FROM productos";
-    }
-
-    $resultado = array();
-
-    $peticion =  mysqli_query($conexion, $comando);
-    if (mysqli_num_rows($peticion) > 0) {
-        while($producto = mysqli_fetch_assoc($peticion)) {
-            array_push($resultado, $producto);
-        }
-    }
-
-    return $resultado;
-
-}
 
 function buscarProducto($id) {
 

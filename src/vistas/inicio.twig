@@ -27,11 +27,11 @@
         </form>
 
 
-        {% for i, producto in productos %}
+        {% for i, categoria in categorias %}
             <div class="producto">
-                <a href="{{ url("/producto/", producto.id ) }}">
+                <a href="?categoria={{ categoria }}">
                     <div class="producto__categoria">
-                        <p>#{{ producto.categoria }}</p>
+                        <p>#{{ categoria }}</p>
                     </div>
                 </a>
             </div>
