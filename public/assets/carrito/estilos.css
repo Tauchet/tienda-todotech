@@ -39,3 +39,13 @@ tr:nth-child(even) {
 h2 {
     margin-bottom: 1rem;
 }
+
+.producto-icono {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.producto-icono img {
+    border-radius: 0.5rem;
+}

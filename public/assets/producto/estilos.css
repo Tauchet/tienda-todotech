@@ -17,6 +17,15 @@
 
 }
 
+.carrito {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.carrito-notificacion {
+    grid-column: 2;
+}
+
 .carrito input {
     text-align: center;
     font-size: 1.1rem;
@@ -75,4 +84,18 @@
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
     border-bottom: 1px solid #ddd;
+}
+
+.producto-encabezado-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.producto-encabezado-imagen img {
+    border-radius: 1rem;
+}
+
+.carrito-finalizar {
+    margin-top: 1rem;
 }

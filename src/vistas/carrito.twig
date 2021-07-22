@@ -72,7 +72,12 @@
                 </tr>
                 {% for i, producto in carrito %}
                     <tr producto-id="{{ producto.producto.id }}">
-                        <td><a href="{{ url('producto/', producto.producto.id) }}">{{ producto.producto.nombre }}</a></td>
+                        <td>
+                            <div class="producto-icono">
+                                <img src="{{ producto.producto.imagen }}" width="140px" height="100px" alt="">
+                                <a href="{{ url('producto/', producto.producto.id) }}">{{ producto.producto.nombre }}</a>
+                            </div>
+                        </td>
                         <td class="carrito-cantidad">{{ producto.cantidad }}</td>
                         <td>$ {{ (producto.producto.precio * producto.cantidad)|number_format(0, '.', ',') }}</td>
                         <td>

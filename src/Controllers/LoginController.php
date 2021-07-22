@@ -31,7 +31,7 @@ class LoginController {
             return;
         }
 
-        $resultado['error'] = "¡Aún no existe un registro con este correo electronico!";
+        $resultado['error'] = "¡Verifica tu contraseña o correo! No existe este registro.";
         $resultado['error_correo'] = true;
         renderizar("login", $resultado);
 

@@ -12,6 +12,7 @@ class ProductoEditorController {
         $producto = buscarProducto($productoId);
         renderizar("admin/producto-editor", [
             'nombre' => $producto['nombre'],
+            'imagen' => $producto['imagen'],
             'descripcion' => $producto['descripcion'],
             'categoria' => $producto['categoria'],
             'precio' => $producto['precio'],
@@ -29,6 +30,11 @@ class ProductoEditorController {
 
         if (estaVacio($_POST["nombre"])) {
             $resultado['error_nombre'] = true;
+            $error = true;
+        }
+
+        if (estaVacio($_POST["imagen"])) {
+            $resultado['error_imagen'] = true;
             $error = true;
         }
 
@@ -55,6 +61,7 @@ class ProductoEditorController {
 
         $resultado['producto_actual_codigo'] = $productoId;
         $resultado['nombre'] = $_POST["nombre"];
+        $resultado['imagen'] = $_POST["imagen"];
         $resultado['descripcion'] = $_POST["descripcion"];
         $resultado['categoria'] = $_POST["categoria"];
         $resultado['precio'] =  $_POST["precio"];
@@ -67,9 +74,9 @@ class ProductoEditorController {
         }
 
 
-
         $actualizado = actualizarProducto($productoId,
             $_POST["nombre"],
+            $_POST["imagen"],
             $_POST["descripcion"],
             $_POST["categoria"],
             $_POST["precio"],
@@ -97,6 +104,11 @@ class ProductoEditorController {
             $error = true;
         }
 
+        if (estaVacio($_POST["imagen"])) {
+            $resultado['error_imagen'] = true;
+            $error = true;
+        }
+
         if (estaVacio($_POST["descripcion"])) {
             $resultado['error_descripcion'] = true;
             $error = true;
@@ -118,6 +130,7 @@ class ProductoEditorController {
         }
 
         $resultado['nombre'] = $_POST["nombre"];
+        $resultado['imagen'] = $_POST["imagen"];
         $resultado['descripcion'] = $_POST["descripcion"];
         $resultado['categoria'] = $_POST["categoria"];
         $resultado['precio'] =  $_POST["precio"];
@@ -129,7 +142,7 @@ class ProductoEditorController {
             return;
         }
 
-        $productoCodigo = registrarProducto($_POST["nombre"], $_POST["descripcion"], $_POST["categoria"], $_POST["precio"], $_POST["stock"]);
+        $productoCodigo = registrarProducto($_POST["nombre"], $_POST["imagen"], $_POST["descripcion"], $_POST["categoria"], $_POST["precio"], $_POST["stock"]);
         if ($productoCodigo != NULL) {
             renderizar("admin/producto-editor", [
                 'completado' => true,

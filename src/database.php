@@ -166,11 +166,11 @@ function buscarListaProductos($ids): array
     return $resultado;
 }
 
-function registrarProducto($nombre, $descripcion, $categoria,$precio, $stock) {
+function registrarProducto($nombre, $imagen, $descripcion, $categoria,$precio, $stock) {
     $precio = intval($precio);
     $stock = intval($stock);
     $conexion = conectar();
-    $comando = "INSERT INTO productos(nombre, descripcion, categoria, precio, stock) VALUES ('$nombre', '$descripcion', '$categoria',$precio, $stock);";
+    $comando = "INSERT INTO productos(nombre, imagen, descripcion, categoria, precio, stock) VALUES ('$nombre', '$imagen', '$descripcion', '$categoria', $precio, $stock);";
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
         return mysqli_insert_id($conexion);
@@ -207,11 +207,11 @@ function registrarVenta($uid, $direccion, $productos) {
     return null;
 }
 
-function actualizarProducto($productoId, $nombre, $descripcion, $categoria, $precio, $stock) {
+function actualizarProducto($productoId, $nombre, $imagen, $descripcion, $categoria, $precio, $stock) {
     $precio = intval($precio);
     $stock = intval($stock);
     $conexion = conectar();
-    $comando = "UPDATE productos SET nombre='$nombre', descripcion='$descripcion', categoria='$categoria', precio=$precio, stock=$stock WHERE `id`=$productoId";
+    $comando = "UPDATE productos SET nombre='$nombre', imagen='$imagen', descripcion='$descripcion', categoria='$categoria', precio=$precio, stock=$stock WHERE `id`=$productoId";
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
         return true;
