@@ -27,6 +27,8 @@ $router->get("/admin/nuevo-producto", "\\Controllers\\Admin\\ProductoEditorContr
 $router->post("/admin/nuevo-producto", "\\Controllers\\Admin\\ProductoEditorController@ejecutar");
 $router->get("/admin/editar-producto/{productoId}", "\\Controllers\\Admin\\ProductoEditorController@editar");
 $router->post("/admin/editar-producto/{productoId}", "\\Controllers\\Admin\\ProductoEditorController@ejecutarEditar");
+$router->get("/admin/gestion-ventas/", "\\Controllers\\Admin\\GestionVentaController@mostrar");
+$router->get("/venta/{id}", "\\Controllers\\VentaController@buscar");
 
 $router->get("/cliente/garantia-producto", "\\Controllers\\Cliente\\SolicitarGarantiaController@mostrar");
 $router->post("/cliente/garantia-producto", "\\Controllers\\Cliente\\SolicitarGarantiaController@ejecutar");

@@ -149,6 +149,8 @@ function buscarProducto($id) {
 
 }
 
+
+
 function buscarListaProductos($ids): array
 {
     $resultado = array();
@@ -221,3 +223,41 @@ function registrarGarantia($codigo, $problema, $descripcion){
     }
     return null;
 }
+
+function buscarVentas(){
+
+    $conexion = conectar();
+
+    $comando = "SELECT * FROM `ventas`";
+
+    $resultado = array();
+
+    $peticion =  mysqli_query($conexion, $comando);
+    if (mysqli_num_rows($peticion) > 0) {
+        while($venta = mysqli_fetch_assoc($peticion)) {
+            array_push($resultado, $venta);
+        }
+    }
+
+    return $resultado;
+}
+
+function buscarProductoVenta($id){
+
+    $conexion = conectar();
+
+    $comando = "SELECT * FROM ventas_producto INNER JOIN ventas ON ventas_producto.venta_id = ventas.id INNER JOIN usuarios ON ventas.usuario_id = usuarios.id 
+                INNER JOIN productos ON ventas_producto.producto_id = productos.id WHERE `venta_id`=$id";
+
+    $resultado = array();
+
+    $peticion =  mysqli_query($conexion, $comando);
+    if (mysqli_num_rows($peticion) > 0) {
+        while($ventaProducto = mysqli_fetch_assoc($peticion)) {
+            array_push($resultado, $ventaProducto);
+        }
+    }
+
+    return $resultado;
+}
+

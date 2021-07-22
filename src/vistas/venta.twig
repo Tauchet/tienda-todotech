@@ -1,0 +1,27 @@
+{% extends "base.twig" %}
+
+{% block title %}Venta / {{ venta.id }}{% endblock %}
+{% block metadata %}
+    <link rel="stylesheet" href="{{ url("/public/assets/producto/estilos.css") }}">
+{% endblock %}
+
+{% block content %}
+
+    {% include "componentes/menu.twig" %}
+
+    <div class="ventas_producto">
+        {% for i, ventaProducto in ventas_producto %}
+            <div class="{{ html_classes('ventas_producto', {activa: ventaProducto_actual == ventaProducto}) }}">
+                <p>Id de venta: {{ ventaProducto.venta_id }}</p>
+                <p>Id de producto: {{ ventaProducto.producto_id }}</p>
+                <p>Nombre de producto: {{ ventaProducto.nombre }}</p>
+                <p>Cantidad del producto: {{ ventaProducto.cantidad }}</p>
+                <p>Fecha de la compra: {{ ventaProducto.fecha_compra }}</p>
+                <p>Nombre: {{ ventaProducto.nombre }}</p>
+                <p>Correo: {{ ventaProducto.correo }}</p>
+                <br><br>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
