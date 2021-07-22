@@ -22,6 +22,7 @@ $router->before("GET|POST", "/login", "\\Middlewares\\UsuarioMiddleware@esInvita
 $router->before("GET|POST", "/registro", "\\Middlewares\\UsuarioMiddleware@esInvitado");
 
 $router->get("/", "\\Controllers\\InicioController@mostrar");
+$router->get("/2", "\\Controllers\\InicioController@mostrar2");
 
 $router->get("/admin/nuevo-producto", "\\Controllers\\Admin\\ProductoEditorController@mostrar");
 $router->post("/admin/nuevo-producto", "\\Controllers\\Admin\\ProductoEditorController@ejecutar");

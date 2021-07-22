@@ -19,4 +19,19 @@ class InicioController {
 
     }
 
+    public static function mostrar2() {
+
+        $resultado = [];
+        $busqueda = $_REQUEST['busqueda'] ?? null;
+
+        if ($busqueda !== null) {
+            $resultado['busqueda'] = $_REQUEST['busqueda'];
+        }
+
+        $resultado['productos'] = buscarProductosCategoria($busqueda);
+
+        renderizar("inicio", $resultado);
+
+    }
+
 }

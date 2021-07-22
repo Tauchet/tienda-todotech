@@ -95,6 +95,29 @@ function buscarProductos($busqueda = null): array {
 
 }
 
+function buscarProductosCategoria($busqueda = null): array {
+
+    $conexion = conectar();
+
+    if ($busqueda !== null) {
+        $comando = "SELECT distinct categoria FROM `productos` WHERE `nombre` LIKE '%".$busqueda."%'";
+    } else {
+        $comando = "SELECT distinct categoria FROM productos";
+    }
+
+    $resultado = array();
+
+    $peticion =  mysqli_query($conexion, $comando);
+    if (mysqli_num_rows($peticion) > 0) {
+        while($producto = mysqli_fetch_assoc($peticion)) {
+            array_push($resultado, $producto);
+        }
+    }
+
+    return $resultado;
+
+}
+
 function buscarProducto($id) {
 
     $conexion = conectar();
@@ -123,11 +146,11 @@ function buscarListaProductos($ids): array
     return $resultado;
 }
 
-function registrarProducto($nombre, $descripcion, $precio, $stock) {
+function registrarProducto($nombre, $descripcion, $categoria,$precio, $stock) {
     $precio = intval($precio);
     $stock = intval($stock);
     $conexion = conectar();
-    $comando = "INSERT INTO productos(nombre, descripcion, precio, stock) VALUES ('$nombre', '$descripcion', $precio, $stock);";
+    $comando = "INSERT INTO productos(nombre, descripcion, categoria, precio, stock) VALUES ('$nombre', '$descripcion', '$categoria',$precio, $stock);";
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
         return mysqli_insert_id($conexion);
@@ -158,11 +181,11 @@ function registrarVenta($uid, $direccion, $productos) {
     return null;
 }
 
-function actualizarProducto($productoId, $nombre, $descripcion, $precio, $stock) {
+function actualizarProducto($productoId, $nombre, $descripcion, $categoria, $precio, $stock) {
     $precio = intval($precio);
     $stock = intval($stock);
     $conexion = conectar();
-    $comando = "UPDATE productos SET nombre='$nombre', descripcion='$descripcion', precio=$precio, stock=$stock WHERE `id`=$productoId";
+    $comando = "UPDATE productos SET nombre='$nombre', descripcion='$descripcion', categoria='$categoria', precio=$precio, stock=$stock WHERE `id`=$productoId";
     $resultado = mysqli_query($conexion, $comando);
     if ($resultado) {
         return true;

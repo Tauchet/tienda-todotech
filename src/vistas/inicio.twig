@@ -25,6 +25,21 @@
                 </div>
             </div>
         </form>
+
+
+        {% for i, producto in productos %}
+            <div class="producto">
+                <a href="{{ url("/producto/", producto.id ) }}">
+                    <div class="producto__categoria">
+                        <p>#{{ producto.categoria }}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+
+
+
+
         <div class="productos">
             {% for i, producto in productos %}
                 <div class="producto">
@@ -37,6 +52,9 @@
                         </div>
                         <div class="producto__precio">
                             <p>${{ producto.precio }}</p>
+                        </div>
+                        <div class="producto__categoria">
+                            <p>#{{ producto.categoria }}</p>
                         </div>
                         
                     </a>
